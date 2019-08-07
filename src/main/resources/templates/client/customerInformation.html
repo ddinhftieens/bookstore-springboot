@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}">
+    <title>CustomerInformation</title>
+    <script>
+        function changepassword() {
+            document.getElementById("001").style.display = 'none';
+            document.getElementById("002").style.display = 'none';
+            document.getElementById("003").style.display = 'block';
+            document.getElementById("004").style.display = 'block';
+
+        }
+        function cancelpassword() {
+            document.getElementById("001").style.display = 'block';
+            document.getElementById("002").style.display = 'block';
+            document.getElementById("003").style.display = 'none';
+            document.getElementById("004").style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+<h1 id="001">Thông tin khách hàng</h1>
+<form style="border: 1px solid #cccccc" id="002" th:action="@{/customer/updateInformation}" method="post" th:object="${customerDTO}">
+    <div class="contain">
+        <label><b>Tài khoản</b></label>
+        <input type="text" th:value="${customerDTO.getUsername()}" id="username" name="username" disabled>
+        <label><b>Tên</b></label>
+        <input type="text" th:value="${customerDTO.getFristname()}" id="fristName" name="fristName" disabled>
+        <label><b>Họ</b></label>
+        <input type="text" th:value="${customerDTO.getLastname()}" id="lastName" name="lastName" disabled>
+        <label><b>Giới tính</b></label>
+        <input type="text" th:value="${customerDTO.getGender()}" id="gender" name="gender" disabled>
+        <br><br><label><b>Ngày sinh</b></label>
+        <input type="text" th:value="${customerDTO.getDateofbrith()}" id="dateOfbird" name="dateOfbird" disabled>
+        <br><br><label><b>Địa chỉ</b></label>
+        <input type="text" th:value="${customerDTO.getAddress()}" th:field="*{address}" id="address" name="address" required>
+        <label><b>Số điện thoại</b></label>
+        <input type="text" th:value="${customerDTO.getPhone()}" th:filed="*{phone}" id="phone" name="phone" required>
+        <label><b>Email</b></label>
+        <input type="email" th:value="${customerDTO.getEmail()}" th:field="*{email}" id="mail" name="main" required>
+        <label><b>Nghề nghiệp</b></label>
+        <select id="job" name="job">
+            <option value="Student">Học sinh</option>
+            <option value="Teacher">Giáo viên</option>
+            <option value="Engineer">Kĩ sư</option>
+            <option value="Doctor">Bác sĩ</option>
+            <option value="Employee">Công nhân</option>
+            <option value="Orther">Khác</option>
+        </select>
+        <br><br><label><b>Số CMND/CCCD </b></label>
+        <input type="text" th:value="${customerDTO.getIDcard()}" id="IDcard" value="Số CMND/CCCD" name="IDcard" disabled>
+        <div class="clearfix">
+            <button type="submit" id="save" class="saveIF">Lưu</button>
+            <button type="button" id="updatepass" class="updatepass" onclick="changepassword()">Đổi mật khẩu</button>
+        </div>
+    </div>
+</form>
+<h1 style="display: none" id="003">Đổi mật khẩu</h1>
+<form id="004" style="border: 1px solid #cccccc;display: none">
+    <div class="contain">
+        <label><b>Mật khẩu cũ</b></label>
+        <input type="password" placeholder="Mật khẩu cũ" id="oldpassword" name="oldpassword" required>
+        <label><b>Mật khẩu mới</b></label>
+        <input type="password" placeholder="Mật khẩu mới" id="newpassword" name="newpassword" required>
+        <label><b>Xác nhận mật khẩu mới</b></label>
+        <input type="password" placeholder="Nhập lại mật khẩu mới" id="enterpassword" name="enterpassword" required>
+        <div class="clearfix">
+            <button type="button" id="cancelbtn" class="updatepass" onclick="cancelpassword()">Hủy</button>
+            <button type="submit" id="savebtn" class="saveIF">Lưu</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

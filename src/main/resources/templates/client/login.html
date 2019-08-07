@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}">
+    <script th:src="@{/js/captcha.js}"></script>
+    <title>Login</title>
+    <script type="text/javascript">
+        var captch = "";
+        var input = "";
+        $(document).ready(function () {
+            $("#login").click(function () {
+                input = $("#captcha").val();
+                captch = $("#codeCaptcha").text();
+                if(input == captch){
+                    return true;
+                }
+                else {
+                    alert("Mã captcha không chính xác");
+                    $("#captcha").val("");
+                    return false;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<h1>Đăng nhập</h1>
+<form style="border: 1px solid #ccc" th:action="@{/home}" method="post" th:object="${customerDTO}">
+    <div class="contain">
+        <label><b>Tài khoản</b></label>
+        <input type="text" placeholder="Tài khoản" id="username" name="username" th:field="*{username}" required>
+        <label><b>Mật khẩu</b></label>
+        <input type="password" placeholder="Mật khẩu" id="password"  name="password" th:field="*{password}" required>
+        <label><b>Captcha</b></label>
+        <input type="text" name="captcha" placeholder="Mã captcha" id="captcha" required>
+        <p id="codeCaptcha" style="background: #cccccc; width: 30%; text-align: center; font-family: 'Lucida Handwriting';"></p>
+        <script th:src="@{/js/captcha.js}"></script>
+        <p>Đăng kí tài khoản <a th:href="@{/customer/register}">tại đây</a>.</p>
+        <div class="clearfix">
+            <button type="submit" id="login">Đăng nhập</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

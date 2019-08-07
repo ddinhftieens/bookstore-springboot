@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}">
+    <title>Register</title>
+    <script type="text/javascript">
+        var s1 = "";
+        var s2 = "";
+        $(document).ready(function () {
+            $("#signup").click(function () {
+                s1 = $("#captcha").val();
+                s2 = $("#codeCaptcha").text();
+                if(s1 == s2){
+                    s1 = $("#password").val();
+                    s2 = $("#repeatpass").val();
+                    if(s1==s2){
+                        return true;
+                    }
+                    else{
+                        $("#password").val("");
+                        $("#repeatpass").val("");
+                        alert("Mật khẩu không trùng khớp");
+                        return false;
+                    }
+                }
+                else {
+                    $("#captcha").val("");
+                    alert("Mã captcha không chính xác");
+                    return false;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<h1>Đăng kí</h1>
+<form style="border: 1px solid #ccc" th:action="@{/customer/register}" method="post" th:object="${customerDTO}">
+    <div class="contain">
+        <label><b>Tài khoản</b></label>
+        <input type="text" placeholder="Tài khoản" id="username" name="username" th:field="*{username}" required>
+        <label><b>Mật khẩu</b></label>
+        <input type="password" placeholder="Mật khẩu" id="password" name="password" th:field="*{password}" required>
+        <label><b> Nhập lại mật khẩu</b></label>
+        <input type="password" placeholder="Nhập lại mật khẩu" id="repeatpass" name="repeatpass" required>
+        <label><b>Tên</b></label>
+        <input type="text" placeholder="Tên" id="fristName" name="fristName" th:field="*{fristname}" required>
+        <label><b>Họ</b></label>
+        <input type="text" placeholder="Họ" id="lastName" name="lastName" th:field="*{lastname}" required>
+        <label><b>Giới tính</b></label>
+        <select id="sex" name="sex" th:field="*{gender}">
+            <option value="Son">Nam</option>
+            <option value="Daughter">Nữ</option>
+        </select>
+        <br><br><label><b>Ngày sinh</b></label>
+        <input type="date" id="dateOfbird" name="dateOfbird" th:field="*{dateofbrith}" required>
+        <br><br><label><b>Địa chỉ</b></label>
+        <input type="text" placeholder="Địa chỉ" id="address" name="address" th:field="*{address}" required>
+        <label><b>Số điện thoại</b></label>
+        <input type="text" placeholder="Số điện thoại" id="phone" name="phone" th:field="*{phone}" required>
+        <label><b>Email</b></label>
+        <input type="email" placeholder="Email" id="mail" name="main" th:field="*{email}" required>
+        <label><b>Nghề nghiệp</b></label>
+        <select id="job" name="job">
+            <option value="Student">Học sinh</option>
+            <option value="Teacher">Giáo viên</option>
+            <option value="Engineer">Kĩ sư</option>
+            <option value="Doctor">Bác sĩ</option>
+            <option value="Employee">Công nhân</option>
+            <option value="Orther">Khác</option>
+        </select>
+        <br><br><label><b>Số CMND/CCCD </b></label>
+        <input type="text" id="IDcard" placeholder="Số CMND/CCCD" name="IDcard" th:field="*{IDcard}" required>
+        <label><b>Captcha</b></label>
+        <input type="text" name="captcha" placeholder="Mã captcha" id="captcha" required>
+        <p id="codeCaptcha" name="codeCaptcha" style="background: #cccccc; width: 30%; text-align: center; font-family: 'Lucida Handwriting';"></p>
+        <script th:src="@{/js/captcha.js}"></script>
+        <div class="clearfix">
+            <button type="submit" id="signup">Đăng kí</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

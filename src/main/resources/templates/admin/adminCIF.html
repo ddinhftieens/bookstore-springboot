@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <title>Customer Information</title>
+</head>
+<body class="header" style="text-align: center">
+<h1>Danh sách khách hàng</h1>
+<div>
+    <table border="1" class="table">
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Họ</th>
+            <th>Ngày sinh</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Chi tiết</th>
+            <th>Lịch sử giao dịch</th>
+            <th>Xóa</th>
+        </tr>
+        <tr th:each="i : ${customerDTO}">
+            <td th:text="${i.ID}">...</td>
+            <td th:text="${i.fristname}">...</td>
+            <td th:text="${i.lastname}">...</td>
+            <td th:text="${i.dateofbrith}">...</td>
+            <td th:text="${i.address}">...</td>
+            <td th:text="${i.phone}">...</td>
+            <td><a th:href="@{'admin/showcustomer/' + ${i.ID}}">Chi tiết</a></td>
+            <td><a th:href="@{'admin/showcustomer/' + ${i.ID}}">Giao dịch</a></td>
+            <td><a th:href="@{'admin/showcustomer/' + ${i.ID}}">Xóa</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

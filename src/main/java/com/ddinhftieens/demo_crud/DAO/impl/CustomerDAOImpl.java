@@ -9,6 +9,7 @@ import com.ddinhftieens.demo_crud.Model.CustomerDTO;
 import com.ddinhftieens.demo_crud.Model.CustomerRowMapper;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 @Repository
 @Transactional
@@ -64,6 +65,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public List<CustomerDTO> getAll() {
-        return null;
+        String sql = "select * from customer";
+        List<CustomerDTO> customerDTOList = this.jdbcTemplate.query(sql,new CustomerRowMapper());
+        return customerDTOList;
     }
 }

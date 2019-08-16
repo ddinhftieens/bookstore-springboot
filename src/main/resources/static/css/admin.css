@@ -1,4 +1,4 @@
-.button {
+.button{
     border-radius: 4px;
     background-color: #f4511e;
     border: none;
@@ -10,15 +10,27 @@
     cursor: pointer;
     margin: 5px;
 }
+.button-search{
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    padding: 12px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
 
-.button span {
+.button span , .button-search span{
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
 }
 
-.button span:after {
+.button span:after ,.button-search span:after{
     content: '\00bb';
     position: absolute;
     opacity: 0;
@@ -27,11 +39,11 @@
     transition: 0.5s;
 }
 
-.button:hover span {
+.button:hover span ,.button-search:hover span{
     padding-right: 25px;
 }
 
-.button:hover span:after {
+.button:hover span:after ,.button-search:hover span:after{
     opacity: 1;
     right: 0;
 }

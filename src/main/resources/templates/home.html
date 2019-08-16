@@ -92,15 +92,6 @@
                                 <li>
                                     <a href="">Tiếng Trung</a>
                                 </li>
-                                <li>
-                                    <a href="">Tiếng Đức</a>
-                                </li>
-                                <li>
-                                    <a href="">Tiếng Nga</a>
-                                </li>
-                                <li>
-                                    <a href="">Tiếng Pháp</a>
-                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -111,9 +102,9 @@
                 <li>
                     <a href="">Sách giảm giá</a>
                 </li>
-                <li th:if="${user}" th:style="block">
-                    <a href="" th:utext="${user}"></a>
-                    <ul class="menu-child">
+                <li>
+                    <a href="" th:text="${user}?${user}:'Đăng nhập'" th:href="${user}?'#1':'/customer/login'"></a>
+                    <ul class="menu-child" th:if="${user}">
                         <li>
                             <a th:href="@{/customer/information}">Tài khoản</a>
                         </li>
@@ -138,11 +129,11 @@
         </div>
 
         <div style="text-align: center;">
-            <button class="button" onclick="nextpage()"><span>Đăng nhập</span></button>
+            <button class="button" onclick="nextpage()"><span>Giỏ hàng</span></button>
         </div>
         <script type="text/javascript">
             function nextpage() {
-                window.location.href = "/customer/login";
+                window.location.href = "";
             }
         </script>
     </div>

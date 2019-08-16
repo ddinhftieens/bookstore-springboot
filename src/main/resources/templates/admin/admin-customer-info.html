@@ -8,7 +8,13 @@
 </head>
 <body class="header" style="text-align: center">
 <h1>Danh sách khách hàng</h1>
-<div>
+<div style="float: right;margin: 10px">
+    <form>
+        <input type="text" placeholder="search by frist-name" id="search" name="search" style="font-size: 16px;padding: 8px">
+        <button class="button-search" ><span>Search</span></button>
+    </form>
+</div>
+<div style="margin: 10px">
     <table border="1" class="table">
         <tr>
             <th>ID</th>
@@ -28,9 +34,9 @@
             <td th:text="${i.dateofbrith}">...</td>
             <td th:text="${i.address}">...</td>
             <td th:text="${i.phone}">...</td>
-            <td><a th:href="@{'admin/showcustomer/' + ${i.ID}}">Chi tiết</a></td>
-            <td><a th:href="@{'admin/showcustomer/' + ${i.ID}}">Giao dịch</a></td>
-            <td><a th:href="@{'admin/showcustomer/' + ${i.ID}}">Xóa</a></td>
+            <td><a th:href="@{'/admin/showcustomer?ID=' + ${i.ID}}">Chi tiết</a></td>
+            <td><a th:href="@{'/admin/transaction?ID=' + ${i.ID}}">Giao dịch</a></td>
+            <td><a th:href="@{'/admin/delete?ID=' + ${i.ID}}">Xóa</a></td>
         </tr>
     </table>
 </div>

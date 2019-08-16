@@ -9,8 +9,8 @@ import com.ddinhftieens.demo_crud.Model.CustomerDTO;
 import com.ddinhftieens.demo_crud.Model.CustomerRowMapper;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 @Transactional
 public class CustomerDAOImpl implements CustomerDAO {
@@ -29,6 +29,19 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
+    public int checkregister_update(String user, String email, String idcard, String phone,String type) {
+        String sql="";
+        if(type.equals("register")){
+            sql = "select count(0) from customer where UserName = ? or Email = ? or IDcard = ? or Phone = ?";
+            return this.jdbcTemplate.queryForObject(sql,new Object[]{user,email,idcard,phone},Integer.class);
+        }
+        else {
+            sql = "select count(0) from customer where (UserName = ? or Email = ? or IDcard = ? or Phone = ?)and UserName!=?";
+            return this.jdbcTemplate.queryForObject(sql,new Object[]{user,email,idcard,phone,type},Integer.class);
+        }
+    }
+
+    @Override
     public void add(CustomerDTO customerDTO) {
         String sql = "insert into customer (FristName, LastName, UserName, PassWord, Gender, Address, Email, IDcard, Phone, Role, DateofBrith) values (?,?,?,?,?,?,?,?,?,?,?)";
         this.jdbcTemplate.update(sql,new Object[]{customerDTO.getFristname(),customerDTO.getLastname(),customerDTO.getUsername(),customerDTO.getPassword(),customerDTO.getGender(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getIDcard(),customerDTO.getPhone(),"Customer",customerDTO.getDateofbrith()});
@@ -36,19 +49,20 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void edit(CustomerDTO customerDTO) {
-        String sql = "update customer set ... where...";
-        this.jdbcTemplate.update(sql,new Object[]{});
+        String sql = "update customer set Address = ?,Email = ?,Phone = ? where UserName = ?";
+        this.jdbcTemplate.update(sql,new Object[]{customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getPhone(),customerDTO.getUsername()});
     }
 
     @Override
-    public void delete(CustomerDTO customerDTO) {
-        String sql = "delete from customer where ...";
+    public void delete(int ID) {
+        String sql = "delete from customer where ID = " + ID;
         this.jdbcTemplate.update(sql,new Object[]{});
     }
 
     @Override
     public CustomerDTO getByID(int ID) {
-        return null;
+        String sql = "select * from customer where ID = " + ID;
+        return (CustomerDTO) this.jdbcTemplate.queryForObject(sql,new CustomerRowMapper());
     }
 
     @Override
@@ -68,5 +82,11 @@ public class CustomerDAOImpl implements CustomerDAO {
         String sql = "select * from customer";
         List<CustomerDTO> customerDTOList = this.jdbcTemplate.query(sql,new CustomerRowMapper());
         return customerDTOList;
+    }
+
+    @Override
+    public int changepass(String old, String newp,String user) {
+        String sql = "update customer set PassWord = ? where PassWord = ? and UserName = ?";
+        return this.jdbcTemplate.update(sql,new Object[]{newp,old,user});
     }
 }

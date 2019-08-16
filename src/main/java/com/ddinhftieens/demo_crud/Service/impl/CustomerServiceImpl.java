@@ -21,23 +21,28 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public int checkregister_update(String user, String email, String idcard, String phone,String type) {
+        return customerDAO.checkregister_update(user, email, idcard, phone,type);
+    }
+
+    @Override
     public void add(CustomerDTO customerDTO) {
         customerDAO.add(customerDTO);
     }
 
     @Override
     public void edit(CustomerDTO customerDTO) {
-
+        customerDAO.edit(customerDTO);
     }
 
     @Override
-    public void delete(CustomerDTO customerDTO) {
-
+    public void delete(int ID) {
+        customerDAO.delete(ID);
     }
 
     @Override
     public CustomerDTO getByID(int ID) {
-        return null;
+        return customerDAO.getByID(ID);
     }
 
     @Override
@@ -53,5 +58,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> getAll() {
         return customerDAO.getAll();
+    }
+
+    @Override
+    public int changepass(String old, String newp,String user) {
+        return customerDAO.changepass(old,newp,user);
     }
 }

@@ -120,6 +120,6 @@ public class CustomerDTO {
 
     @Override
     public String toString() {
-        return fristname +" "+lastname+" "+username+" "+password+" "+gender+" "+dateofbrith+" "+phone+" "+email+" "+address+" "+IDcard;
+        return fristname +" "+lastname+" "+username+" "+password+" "+gender+" "+dateofbrith+" "+phone+" "+email+" "+address+" "+IDcard+" "+role;
     }
 }

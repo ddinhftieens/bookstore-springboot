@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}">
     <title>CustomerInformation</title>
     <script>
@@ -19,10 +20,27 @@
             document.getElementById("004").style.display = 'none';
         }
     </script>
+    <script>
+        $(document).ready(function () {
+            $("#savebtn").click(function () {
+                var s1 = $("#newpassword").val();
+                var s2 = $("#enterpassword").val();
+                if(s1==s2){
+                    return true;
+                }
+                else{
+                    $("#newpassword").val("");
+                    $("#enterpassword").val("");
+                    alert("Mật khẩu không trùng khớp");
+                    return false;
+                }
+            })
+        })
+    </script>
 </head>
 <body>
 <h1 id="001">Thông tin khách hàng</h1>
-<form style="border: 1px solid #cccccc" id="002" th:action="@{/customer/updateInformation}" method="post" th:object="${customerDTO}">
+<form style="border: 1px solid #cccccc" id="002" th:action="@{/customer/update-information}" method="post" th:object="${customerDTO}">
     <div class="contain">
         <label><b>Tài khoản</b></label>
         <input type="text" th:value="${customerDTO.getUsername()}" id="username" name="username" disabled>
@@ -58,7 +76,7 @@
     </div>
 </form>
 <h1 style="display: none" id="003">Đổi mật khẩu</h1>
-<form id="004" style="border: 1px solid #cccccc;display: none">
+<form id="004" style="border: 1px solid #cccccc;display: none" th:action="@{/customer/change-pass}" method="post">
     <div class="contain">
         <label><b>Mật khẩu cũ</b></label>
         <input type="password" placeholder="Mật khẩu cũ" id="oldpassword" name="oldpassword" required>

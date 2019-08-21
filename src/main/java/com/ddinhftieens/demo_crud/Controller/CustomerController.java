@@ -1,6 +1,7 @@
 package com.ddinhftieens.demo_crud.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ddinhftieens.demo_crud.Model.CustomerDTO;
 import com.ddinhftieens.demo_crud.Service.CustomerService;
+import com.ddinhftieens.demo_crud.Service.AdminService;
+import com.ddinhftieens.demo_crud.Model.ProductDTO;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @Controller
 public class CustomerController{
@@ -19,7 +24,15 @@ public class CustomerController{
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    @Qualifier("listproduct")
+    private List<ProductDTO> productDTOList;
+
+//    @Autowired
+//    private AdminService adminService;
+
     private CustomerDTO customerDTO = null;
+//    private List<ProductDTO> productDTOList = new ArrayList<>();
 
     @GetMapping("/customer/login")
     public String login(Model model){
@@ -28,6 +41,7 @@ public class CustomerController{
     }
     @GetMapping("/home")
     public String home(Model model){
+        model.addAttribute("productList",this.productDTOList);
         if(this.customerDTO == null){
             return "home";
         }

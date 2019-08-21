@@ -6,7 +6,7 @@ public class ProductDTO {
     private byte[] image;
     private String IDcode;
     private int numberpage,sale,quantity,typee;
-    private float cost;
+    private float cost,price;
     private String name,author,dateofissue,translator,description,datecreated;
     private String imagebase64;
     public ProductDTO(){
@@ -139,6 +139,14 @@ public class ProductDTO {
 
     public void setImagebase64(String imagebase64) {
         this.imagebase64 = imagebase64;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     @Override

@@ -89,7 +89,7 @@
     <div style="text-align: center;">
         <img th:src="@{'data:image/jpg;base64,'+ ${product.imagebase64}}">
     </div>
-    <form th:action="@{/admin/editproduct}" method="post">
+    <form method="post">
         <article>
             <h2>IDcode</h2>
             <label th:text="${product.getIDcode()}"></label>

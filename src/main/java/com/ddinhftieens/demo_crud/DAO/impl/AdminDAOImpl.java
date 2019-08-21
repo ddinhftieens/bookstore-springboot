@@ -34,6 +34,7 @@ public class AdminDAOImpl implements AdminDAO {
         List<ProductDTO> productDTOList = this.jdbcTemplate.query(sql, new ProductRowMapper());
         for(ProductDTO i:productDTOList){
             i.setImagebase64(Base64.getEncoder().encodeToString(i.getImage()));
+            i.setPrice(i.getCost() - (i.getCost()*i.getSale())/100);
         }
         return productDTOList;
     }
@@ -48,12 +49,13 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void deleteproduct(String IDcode) {
-
+        String sql = "delete from product where IDcode = ?";
+        this.jdbcTemplate.update(sql,new Object[]{IDcode});
     }
 
     @Override
-    public void updateproduct(String IDcode) {
-
+    public void updateproduct(ProductDTO productDTO) {
+        String sql = "update product set Cost = ?, Sale = ?, Quantity = ? where IDcode = ?";
+        this.jdbcTemplate.update(sql,new Object[]{productDTO.getCost(),productDTO.getSale(),productDTO.getQuantity(),productDTO.getIDcode()});
     }
-
 }

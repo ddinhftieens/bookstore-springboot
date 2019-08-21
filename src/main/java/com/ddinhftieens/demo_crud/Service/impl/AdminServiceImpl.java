@@ -37,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void updateproduct(String IDcode) {
-        adminDAO.updateproduct(IDcode);
+    public void updateproduct(ProductDTO productDTO) {
+        adminDAO.updateproduct(productDTO);
     }
 }

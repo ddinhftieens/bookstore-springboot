@@ -96,10 +96,14 @@ public class AdminController {
         return "admin/admin-edit-product";
     }
     @PostMapping("/editproduct")
-    public String editproduct(@ModelAttribute("product") ProductDTO productDTO){
-        System.out.println(productDTO.getCost());
-        System.out.println(productDTO.getSale());
-        System.out.println(productDTO.getQuantity());
+    public String editproduct(@ModelAttribute("product") ProductDTO productDTO,@RequestParam("ID") String IDcode){
+        productDTO.setIDcode(IDcode);
+        adminService.updateproduct(productDTO);
         return "redirect:/admin/home?message=cập nhật sản phẩm thành công";
+    }
+    @GetMapping("/deleteproduct")
+    public String deleteproduct(@RequestParam("ID") String IDcode){
+        adminService.deleteproduct(IDcode);
+        return "redirect:/admin/home?message=xoa san pham thanh cong";
     }
 }

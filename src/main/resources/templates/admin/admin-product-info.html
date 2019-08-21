@@ -46,7 +46,7 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <tr th:each="i : ${listProduct}">
+        <tr th:each="i : ${listProduct}" style="font-size: x-large">
             <td th:text="${i.IDcode}">...</td>
             <td>
                 <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">

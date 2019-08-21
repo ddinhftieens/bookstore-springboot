@@ -8,5 +8,5 @@ public interface AdminService {
     List<ProductDTO> getAll();
     ProductDTO getIDcode(String IDcode);
     void deleteproduct(String IDcode);
-    void updateproduct(String IDcode);
+    void updateproduct(ProductDTO productDTO);
 }

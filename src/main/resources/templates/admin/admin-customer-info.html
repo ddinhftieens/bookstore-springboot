@@ -19,7 +19,7 @@
         <tr>
             <th>ID</th>
             <th>Tên</th>
-            <th>Họ</th>
+            <th>Ngày tạo</th>
             <th>Ngày sinh</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
@@ -30,7 +30,7 @@
         <tr th:each="i : ${customerDTO}">
             <td th:text="${i.ID}">...</td>
             <td th:text="${i.fristname}">...</td>
-            <td th:text="${i.lastname}">...</td>
+            <td th:text="${i.joindate}">...</td>
             <td th:text="${i.dateofbrith}">...</td>
             <td th:text="${i.address}">...</td>
             <td th:text="${i.phone}">...</td>

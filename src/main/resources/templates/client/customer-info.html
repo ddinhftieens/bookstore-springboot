@@ -42,6 +42,8 @@
 <h1 id="001">Thông tin khách hàng</h1>
 <form style="border: 1px solid #cccccc" id="002" th:action="@{/customer/update-information}" method="post" th:object="${customerDTO}">
     <div class="contain">
+        <label><b>Ngày tạo</b></label>
+        <input type="text" th:value="${customerDTO.getJoindate()}" id="joindate" name="joindate" disabled>
         <label><b>Tài khoản</b></label>
         <input type="text" th:value="${customerDTO.getUsername()}" id="username" name="username" disabled>
         <label><b>Tên</b></label>

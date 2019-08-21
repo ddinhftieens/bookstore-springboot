@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import com.ddinhftieens.demo_crud.Model.CustomerDTO;
 import com.ddinhftieens.demo_crud.Service.CustomerService;
 
+import java.util.Calendar;
+
 @Controller
 public class CustomerController{
     @Value("${logging.message}")
@@ -37,13 +39,12 @@ public class CustomerController{
 
     @PostMapping("/home")
     public String checklogin(Model model,@ModelAttribute("customerDTO") CustomerDTO customerDTO){
-        this.customerDTO = customerService.getByUserName(customerDTO.getUsername());
         int k = customerService.checklogin(customerDTO.getUsername(),customerDTO.getPassword());
         if(k==1){
+            this.customerDTO = customerService.getByUserName(customerDTO.getUsername());
             if(customerService.getByUserName(customerDTO.getUsername()).getRole().equals("Admin")){
                 return "redirect:/admin/home";
             }
-//            model.addAttribute("user",this.customerDTO.getIDcard());
             return "redirect:/home";
         }
         else {
@@ -67,22 +68,24 @@ public class CustomerController{
             this.customerDTO.setEmail(customerDTO.getEmail());
             this.customerDTO.setPhone(customerDTO.getPhone());
             customerService.edit(this.customerDTO);
-//            model.addAttribute("user",this.customerDTO.getIDcard());
-            return "redirect:/home";
+            return "redirect:/home?message=cập nhật thông tin thành công";
         }
         else {
-            return "redirect:/customer/information?message=thong tin cap nhat khong hop le";
+            return "redirect:/customer/information?message=thông tin cập nhật không hợp lệ";
 
         }
     }
     @PostMapping("/customer/register")
     public String addcustomer(Model model,@ModelAttribute("customerDTO") CustomerDTO customerDTO){
         if(customerService.checkregister_update(customerDTO.getUsername(),customerDTO.getEmail(),customerDTO.getIDcard(),customerDTO.getPhone(),"register") == 0){
+            Calendar calendar = Calendar.getInstance();
+            String joindate = "" +(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.DATE)+"/"+(calendar.get(Calendar.YEAR))+" "+calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE)+":"+calendar.get(Calendar.SECOND);
+            customerDTO.setJoindate(joindate);
             customerService.add(customerDTO);
-            return "redriect:/home";
+            return "redirect:/home?message=đăng kí thành công";
         }
         else{
-            return "redirect:/customer/register?message=thong tin dang ki khong hop le";
+            return "redirect:/customer/register?message=thông tin đăng kí không hợp lệ";
         }
     }
     @PostMapping("/customer/change-pass")
@@ -91,7 +94,12 @@ public class CustomerController{
             return "redirect:/customer/information?message=mat khau khong chinh xac";
         }
         else {
-            return "redirect:/home?message=thay doi mat khau thanh cong";
+            return "redirect:/home?message=thay đổi mật khẩu thành công";
         }
+    }
+    @GetMapping("/customer/logout")
+    public String logout(){
+        this.customerDTO = null;
+        return "redirect:/home";
     }
 }

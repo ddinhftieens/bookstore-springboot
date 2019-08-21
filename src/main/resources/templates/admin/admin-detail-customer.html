@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CustomerInformation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        header {
+            background-color: orangered;
+            padding: 30px;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+        div{
+            float: left;
+            width: 30%;
+            padding: 20px;
+        }
+        article {
+            float: left;
+            padding: 20px;
+            width: 70%;
+            background-color: #f1f1f1;
+        }
+        section:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        footer {
+            background-color: #f4511e;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+
+        @media (max-width: 600px) {
+            div, article {
+                width: 100%;
+                height: auto;
+            }
+            header{
+                font-size: x-large;
+            }
+        }
+    </style>
+</head>
+<body th:object="${customer}">
+<header>
+    <h2>Thông tin khách hàng</h2>
+</header>
+<section style="background-color: #cccccc">
+    <div style="text-align: center;">
+        <img th:src="@{/images/avatar.png}">
+    </div>
+    <article>
+        <h2>ID</h2>
+        <label th:text="${customer.getID()}"></label>
+        <h2>UserName</h2>
+        <label th:text="${customer.getUsername()}"></label>
+        <h2>FristName</h2>
+        <label th:text="${customer.getFristname()}"></label>
+        <h2>LastName</h2>
+        <label th:text="${customer.getLastname()}"></label>
+        <h2>Gender</h2>
+        <label th:text="${customer.getGender()}"></label>
+        <h2>DateofBrith</h2>
+        <label th:text="${customer.getDateofbrith()}"></label>
+        <h2>Address</h2>
+        <label th:text="${customer.getAddress()}"></label>
+        <h2>Phone</h2>
+        <label th:text="${customer.getPhone()}"></label>
+        <h2>Email</h2>
+        <label th:text="${customer.getEmail()}"></label>
+        <h2>IDcard</h2>
+        <label th:text="${customer.getIDcard()}"></label>
+        <h2>Role</h2>
+        <label th:text="${customer.getRole()}"></label>
+        <h2>Join Date</h2>
+        <label th:text="${customer.getJoindate()}"></label>
+    </article>
+</section>
+<footer>
+    <p>NDT Book Store</p>
+</footer>
+</body>
+</html>

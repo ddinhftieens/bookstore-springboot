@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Edit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        input[type=number],textarea{
+            font-family: "Times New Roman";
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            font-size: x-large;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        header {
+            background-color: orangered;
+            padding: 30px;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+        div{
+            float: left;
+            width: 30%;
+            padding: 20px;
+        }
+        article {
+            float: left;
+            padding: 20px;
+            width: 70%;
+            background-color: #f1f1f1;
+        }
+        section:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        footer {
+            background-color: #f4511e;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        img{
+            width: 110px;
+            height: 160px;
+        }
+
+        @media (max-width: 600px) {
+            div, article {
+                width: 100%;
+                height: auto;
+            }
+            header{
+                font-size: x-large;
+            }
+            input[type=number],textarea{
+                font-size: large;
+            }
+        }
+        button{
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body th:object="${product}">
+<header>
+    <h2>Thông tin sản phẩm</h2>
+</header>
+<section style="background-color: #cccccc">
+    <div style="text-align: center;">
+        <img th:src="@{'data:image/jpg;base64,'+ ${product.imagebase64}}">
+    </div>
+    <form th:action="@{/admin/editproduct}" method="post">
+        <article>
+            <h2>IDcode</h2>
+            <label th:text="${product.getIDcode()}"></label>
+            <h2>Tên sách</h2>
+            <label th:text="${product.getName()}"></label>
+            <h2>Tác giả</h2>
+            <label th:text="${product.getAuthor()}"></label>
+            <h2>Ngày xuất bản</h2>
+            <label th:text="${product.getDateofissue()}"></label>
+            <h2>Số trang</h2>
+            <label th:text="${product.getNumberpage()}"></label>
+            <h2>Dịch giả</h2>
+            <label th:text="${product.getTranslator()}"></label>
+            <h2>Mô tả</h2>
+            <textarea style="height: 200px" th:text="${product.getDescription()}" disabled></textarea>
+            <h2>Giá</h2>
+            <input type="number" th:value="${product.getCost()}" th:field="*{cost}">
+            <h2>Giảm giá</h2>
+            <input type="number" th:value="${product.getSale()}" th:field="*{sale}">
+            <h2>Số lượng còn lại</h2>
+            <input type="number" th:value="${product.getQuantity()}" th:field="*{quantity}">
+            <h2>Thể loại</h2>
+            <label th:text="${product.getTypee()}" id="typee"></label>
+            <h2>Ngày đăng</h2>
+            <label th:text="${product.getDatecreated()}"></label>
+            <button type="submit">Save</button>
+        </article>
+    </form>
+</section>
+<footer>
+    <p>NDT Book Store</p>
+</footer>
+<script th:src="@{/js/typeeproduct.js}"></script>
+</body>
+</html>

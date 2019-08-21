@@ -21,6 +21,7 @@ public class CustomerRowMapper implements RowMapper {
         customerDTO.setPhone(resultSet.getString(10));
         customerDTO.setRole(resultSet.getString(11));
         customerDTO.setDateofbrith(resultSet.getString(12));
+        customerDTO.setJoindate(resultSet.getString(13));
         return customerDTO;
     }
 }

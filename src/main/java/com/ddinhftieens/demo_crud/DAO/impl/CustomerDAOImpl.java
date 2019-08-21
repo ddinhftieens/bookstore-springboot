@@ -43,8 +43,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void add(CustomerDTO customerDTO) {
-        String sql = "insert into customer (FristName, LastName, UserName, PassWord, Gender, Address, Email, IDcard, Phone, Role, DateofBrith) values (?,?,?,?,?,?,?,?,?,?,?)";
-        this.jdbcTemplate.update(sql,new Object[]{customerDTO.getFristname(),customerDTO.getLastname(),customerDTO.getUsername(),customerDTO.getPassword(),customerDTO.getGender(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getIDcard(),customerDTO.getPhone(),"Customer",customerDTO.getDateofbrith()});
+        String sql = "insert into customer (FristName, LastName, UserName, PassWord, Gender, Address, Email, IDcard, Phone, Role, DateofBrith,JoinDate) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+        this.jdbcTemplate.update(sql,new Object[]{customerDTO.getFristname(),customerDTO.getLastname(),customerDTO.getUsername(),customerDTO.getPassword(),customerDTO.getGender(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getIDcard(),customerDTO.getPhone(),"Customer",customerDTO.getDateofbrith(),customerDTO.getJoindate()});
     }
 
     @Override

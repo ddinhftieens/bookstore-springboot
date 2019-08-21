@@ -3,12 +3,12 @@ package com.ddinhftieens.demo_crud.Model;
 public class CustomerDTO {
 
     private int ID;
-    private String fristname,lastname,username,password,gender,address,email,IDcard,phone,role,dateofbrith;
+    private String fristname,lastname,username,password,gender,address,email,IDcard,phone,role,dateofbrith,joindate;
 
     public CustomerDTO(){
 
     }
-    public CustomerDTO(String fristname, String lastname, String username, String password, String gender, String address, String email, String IDcard, String phone, String role, String dateofbrith){
+    public CustomerDTO(String fristname, String lastname, String username, String password, String gender, String address, String email, String IDcard, String phone, String role, String dateofbrith,String joindate){
         this.fristname = fristname;
         this.lastname = lastname;
         this.username = username;
@@ -20,6 +20,7 @@ public class CustomerDTO {
         this.phone = phone;
         this.role = role;
         this.dateofbrith = dateofbrith;
+        this.joindate = dateofbrith;
     }
 
     public String getLastname() {
@@ -116,6 +117,14 @@ public class CustomerDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getJoindate() {
+        return joindate;
+    }
+
+    public void setJoindate(String joindate) {
+        this.joindate = joindate;
     }
 
     @Override

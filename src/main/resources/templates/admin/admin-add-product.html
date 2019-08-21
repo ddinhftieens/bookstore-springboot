@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Add Product</title>
+    <style>
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 30%;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 70%;
+            margin-top: 6px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        input[type=text], select, textarea,input[type=date],input[type=file]{
+            font-family: "Times New Roman";
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            font-size: x-large;
+        }
+        input[type=date],input[type=file],select{
+            width: 50%;
+        }
+        label {
+            font-size: xx-large;
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+        .button {
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+        header {
+            background-color: orangered;
+            padding: 30px;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+        }
+        footer {
+            background-color: #f4511e;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            header{
+                font-size: x-large;
+            }
+            label{
+                font-size: x-large;
+            }
+            input[type=text],input[type=date],input[type=file],select{
+                font-size: large;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h2>Thêm sản phẩm</h2>
+</header>
+<div class="container">
+    <form th:object="${product}" th:action="@{/admin/post-product}" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-25">
+                <label>Danh mục</label>
+            </div>
+            <div class="col-75">
+                <select id="category" name="category" th:field="*{typee}">
+                    <optgroup label="Văn học">
+                        <option value="11">Tiểu thuyết</option>
+                        <option value="12">Trinh thám</option>
+                        <option value="13">Hồi kí</option>
+                        <option value="14">Kinh điển</option>
+                    </optgroup>
+                    <optgroup label="Thiếu nhi">
+                        <option value="21">Truyện tranh</option>
+                        <option value="22">Truyện cổ tích</option>
+                    </optgroup>
+                    <optgroup label="Khoa học">
+                        <option value="31">Thiên văn</option>
+                        <option value="32">Lịch sử</option>
+                        <option value="33">Sinh vật học</option>
+                        <option value="34">Tâm lý học</option>
+                        <option value="35">Hiện tượng tự nhiên</option>
+                    </optgroup>
+                    <optgroup label="Kĩ năng sống">
+                        <option value="41">Kinh nghiệm</option>
+                        <option value="42">Hướng nghiệp</option>
+                        <option value="43">Sáng tạo - Tư duy</option>
+                    </optgroup>
+                    <optgroup label="Ngoại ngữ">
+                        <option value="51">Tiếng Anh</option>
+                        <option value="52">Tiếng Nhật</option>
+                        <option value="53">Tiếng Trung Quốc</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Tên sách</label></div>
+            <div class="col-75">
+                <input type="text" id="name" name="name" placeholder="Tên sách" th:field="*{name}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Tác giả</label></div>
+            <div class="col-75">
+                <input type="text" id="author" name="author" placeholder="Tác giả" th:field="*{author}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Dịch giả</label></div>
+            <div class="col-75">
+                <input type="text" id="translator" name="translator" value="Không" placeholder="Dịch giả" th:field="*{translator}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Ngày xuất bản</label></div>
+            <div class="col-75">
+                <input type="date" id="dateissue" name="dateissue" placeholder="Tên sách" th:field="*{dateofissue}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Số trang</label></div>
+            <div class="col-75">
+                <input type="text" id="number" name="number" placeholder="Số trang" th:field="*{numberpage}"required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Mô tả</label></div>
+            <div class="col-75">
+                <textarea id="description" name="description" placeholder="Mô tả" style="height: 300px" th:field="*{description}"required></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Giá bán</label></div>
+            <div class="col-75">
+                <input type="text" id="cost" name="cost" placeholder="Giá bán" th:field="*{cost}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Giảm giá</label></div>
+            <div class="col-75">
+                <input type="text" id="sale" name="sale" placeholder="Giảm giá" th:field="*{sale}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Số lượng</label></div>
+            <div class="col-75">
+                <input type="text" id="quantity" name="quantity" placeholder="Số lượng" th:field="*{quantity}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25"><label>Ảnh bìa</label></div>
+            <div class="col-75">
+                <input type="file" id="imagee" name="imagee" placeholder="Image" required>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <button class="button" style="width: 50%"><span>Lưu</span></button>
+        </div>
+    </form>
+</div>
+<footer>
+    <h3>NDT Book Store</h3>
+</footer>
+</body>
+</html>

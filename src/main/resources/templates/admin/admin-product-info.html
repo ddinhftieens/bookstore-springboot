@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <title>Product Manager</title>
+    <style>
+        header {
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        footer {
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body class="header" style="text-align: center">
+<header>
+    <h1>Quản lý sản phẩm</h1>
+</header>
+<div style="float: right;margin: 10px">
+    <form>
+        <input type="text" placeholder="search by IDcode ..." id="searchproduct" name="searchproduct" style="font-size: 16px;padding: 8px">
+        <button class="button-search" ><span>Search</span></button>
+    </form>
+</div>
+<div style="float: left;margin: 10px">
+    <form th:action="@{/admin/add-product}">
+        <button class="button-search" ><span>Add Product</span></button>
+    </form>
+</div>
+<div style="margin: 10px">
+    <table border="1" class="table">
+        <tr>
+            <th>IDCode</th>
+            <th>Image</th>
+            <th>Author</th>
+            <th>Cost</th>
+            <th>Sale</th>
+            <th>Quantity</th>
+            <th>Date Created</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="i : ${listProduct}">
+            <td th:text="${i.IDcode}">...</td>
+            <td>
+                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
+            </td>
+            <td th:text="${i.author}">...</td>
+            <td th:text="${i.cost}">...</td>
+            <td th:text="${i.sale}">...</td>
+            <td th:text="${i.quantity}">...</td>
+            <td th:text="${i.datecreated}">...</td>
+            <td><a th:href="@{'/admin/editproduct?ID=' + ${i.IDcode}}">Edit</a></td>
+            <td><a th:href="@{'/admin/deleteproduct?ID=' + ${i.IDcode}}">Delete</a></td>
+        </tr>
+    </table>
+</div>
+<footer>
+    <h2>NDT Book Store</h2>
+</footer>
+</body>
+</html>

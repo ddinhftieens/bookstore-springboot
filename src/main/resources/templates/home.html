@@ -21,97 +21,94 @@
         <nav class="menu">
             <ul>
                 <li>
-                    <a href="">Sách mới</a>
+                    <a th:href="@{'#newbook'}">Sách mới</a>
                 </li>
                 <li>
-                    <a href="">Danh mục sách</a>
+                    <a href="#">Danh mục sách</a>
                     <ul class="menu-child">
                         <li>
-                            <a href="">Văn học</a>
+                            <a href="#">Văn học</a>
                             <ul class="menu-child-child">
                                 <li>
-                                    <a href="">Tiểu thuyết</a>
+                                    <a th:href="@{'home/catalog?query=11'}">Tiểu thuyết</a>
                                 </li>
                                 <li>
-                                    <a href="">Trinh thám</a>
+                                    <a th:href="@{'home/catalog?query=12'}">Trinh thám</a>
                                 </li>
                                 <li>
-                                    <a href="">Hồi kí</a>
+                                    <a th:href="@{'home/catalog?query=13'}">Hồi kí</a>
                                 </li>
                                 <li>
-                                    <a href="">Kinh điển</a>
+                                    <a th:href="@{'home/catalog?query=14'}">Kinh điển</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="">Thiếu nhi</a>
+                            <a href="#">Thiếu nhi</a>
                             <ul class="menu-child-child">
                                 <li>
-                                    <a href="">Truyện tranh</a>
+                                    <a th:href="@{'home/catalog?query=21'}">Truyện tranh</a>
                                 </li>
                                 <li>
-                                    <a href="">Truyên cổ tích</a>
+                                    <a th:href="@{'home/catalog?query=22'}">Truyện cổ tích</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="">Khoa học</a>
+                            <a href="#">Khoa học</a>
                             <ul class="menu-child-child">
                                 <li>
-                                    <a href="">Thiên văn</a>
+                                    <a th:href="@{'home/catalog?query=31'}">Thiên văn</a>
                                 </li>
                                 <li>
-                                    <a href="">Lịch sử</a>
+                                    <a th:href="@{'home/catalog?query=32'}">Lịch sử</a>
                                 </li>
                                 <li>
-                                    <a href="">Sinh vật học</a>
+                                    <a th:href="@{'home/catalog?query=33'}">Sinh vật học</a>
                                 </li>
                                 <li>
-                                    <a href="">Triết học</a>
+                                    <a th:href="@{'home/catalog?query=34'}">Triết học</a>
                                 </li>
                                 <li>
-                                    <a href="">Tâm lý học</a>
+                                    <a th:href="@{'home/catalog?query=35'}">Tâm lý học</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="">Kĩ năng sống</a>
+                            <a href="#">Kĩ năng sống</a>
                             <ul class="menu-child-child">
                                 <li>
-                                    <a href="">Kinh nghiệm</a>
+                                    <a th:href="@{'home/catalog?query=41'}">Kinh nghiệm</a>
                                 </li>
                                 <li>
-                                    <a href="">Hướng nghiệp</a>
+                                    <a th:href="@{'home/catalog?query=42'}">Hướng nghiệp</a>
                                 </li>
                                 <li>
-                                    <a href="">Sáng tạo - Tư duy</a>
+                                    <a th:href="@{'home/catalog?query=43'}">Sáng tạo - Tư duy</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="">Ngoại ngữ</a>
+                            <a href="#">Ngoại ngữ</a>
                             <ul class="menu-child-child">
                                 <li>
-                                    <a href="">Tiếng Anh</a>
+                                    <a th:href="@{'home/catalog?query=51'}">Tiếng Anh</a>
                                 </li>
                                 <li>
-                                    <a href="">Tiếng Nhật</a>
+                                    <a th:href="@{'home/catalog?query=52'}">Tiếng Nhật</a>
                                 </li>
                                 <li>
-                                    <a href="">Tiếng Trung</a>
+                                    <a th:href="@{'home/catalog?query=53'}">Tiếng Trung</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="">Sách bán chạy nhất</a>
+                    <a href="#">Sách bán chạy nhất</a>
                 </li>
                 <li>
-                    <a href="">Sách giảm giá</a>
-                </li>
-                <li>
-                    <a href="" th:text="${user}?${user}:'Đăng nhập'" th:href="${user}?'#1':'/customer/login'"></a>
+                    <a href="#" th:text="${user}?${user}:'Đăng nhập'" th:href="${user}?'#1':'/customer/login'"></a>
                     <ul class="menu-child" th:if="${user}">
                         <li>
                             <a th:href="@{/customer/information}">Tài khoản</a>
@@ -141,39 +138,39 @@
         </div>
         <script type="text/javascript">
             function nextpage() {
-                window.location.href = "";
+                window.location.href = "/home/cart";
             }
         </script>
     </div>
 </div>
-<div class="shelf">
-    <h1>Sách mới</h1>
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a href="#">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + ' (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-<div class="shelf">
-    <h1>Sách bán chạy nhất</h1>
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a href="#">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + ' (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
+<!--<div class="shelf">-->
+<!--    <h1>Sách mới</h1>-->
+<!--    <nav class="list">-->
+<!--        <ul>-->
+<!--            <li th:each="i:${productList}">-->
+<!--                <a th:href="@{'/home/product?ID=' + ${i.IDcode}}">-->
+<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
+<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
+<!--                    <h2 th:text="${i.price}+'đ'"></h2>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
+<!--<div class="shelf">-->
+<!--    <h1>Sách bán chạy nhất</h1>-->
+<!--    <nav class="list">-->
+<!--        <ul>-->
+<!--            <li th:each="i:${productList}">-->
+<!--                <a href="#">-->
+<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
+<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
+<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
 <div class="shelf">
     <h1>Văn học</h1>
     <nav class="list">
@@ -181,69 +178,69 @@
             <li th:each="i:${productList}">
                 <a href="#">
                     <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + ' (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}"></h2>
+                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                    <h2 th:text="${i.price} + 'đ'"></h2>
                 </a>
             </li>
         </ul>
     </nav>
 </div>
 <div class="shelf">
-    <h1>Tiểu thuyết</h1>
+    <h1>Thiếu nhi</h1>
     <nav class="list">
         <ul>
             <li th:each="i:${productList}">
                 <a href="#">
                     <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + ' (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}"></h2>
+                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                    <h2 th:text="${i.price} + 'đ'"></h2>
                 </a>
             </li>
         </ul>
     </nav>
 </div>
-<div class="shelf">
-    <h1>Kinh dị - Trinh thám</h1>
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a href="#">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + ' (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-<div class="shelf">
-    <h1>Kĩ năng</h1>
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a href="#">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + ' (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-<div class="shelf">
-    <h1>Ngoại ngữ</h1>
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a href="#">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + ' (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
+<!--<div class="shelf">-->
+<!--    <h1>Kinh dị - Trinh thám</h1>-->
+<!--    <nav class="list">-->
+<!--        <ul>-->
+<!--            <li th:each="i:${productList}">-->
+<!--                <a href="#">-->
+<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
+<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
+<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
+<!--<div class="shelf">-->
+<!--    <h1>Kĩ năng</h1>-->
+<!--    <nav class="list">-->
+<!--        <ul>-->
+<!--            <li th:each="i:${productList}">-->
+<!--                <a href="#">-->
+<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
+<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
+<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
+<!--<div class="shelf">-->
+<!--    <h1>Ngoại ngữ</h1>-->
+<!--    <nav class="list">-->
+<!--        <ul>-->
+<!--            <li th:each="i:${productList}">-->
+<!--                <a href="#">-->
+<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
+<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
+<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</div>-->
 <footer>
     <h2>NDT Book Store</h2>
 </footer>

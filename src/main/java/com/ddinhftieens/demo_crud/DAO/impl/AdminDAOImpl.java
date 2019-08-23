@@ -44,6 +44,7 @@ public class AdminDAOImpl implements AdminDAO {
         String sql = "select * from product where IDcode = '" + IDcode + "'";
         ProductDTO productDTO = (ProductDTO) this.jdbcTemplate.queryForObject(sql,new ProductRowMapper());
         productDTO.setImagebase64(Base64.getEncoder().encodeToString(productDTO.getImage()));
+        productDTO.setPrice(productDTO.getCost() - (productDTO.getCost()*productDTO.getSale())/100);
         return productDTO;
     }
 

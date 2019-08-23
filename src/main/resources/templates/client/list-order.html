@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <style>
+        .col-20{
+            float: left;
+            width: 20%;
+            margin-top: 10px;
+        }
+        .col-30{
+            float: left;
+            width: 30%;
+            margin-top: 10px;
+        }
+        .col-10{
+            float: left;
+            width: 10%;
+            margin-top: 10px;
+        }
+        .col-70{
+            float: left;
+            width: 70%;
+            margin-top: 10px;
+        }
+        label,a{
+            font-size: xx-large;
+        }
+        @media(max-width: 600px){
+            label,a{
+                font-size: large;
+            }
+        }
+        img{
+            width: 100px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Giỏ hàng</h1>
+</header>
+<div class="row" style="text-align: center">
+    <button class="button-search" onclick="window.location.href='#'"><span>Đặt hàng</span></button>
+    <button class="button-search" onclick="window.location.href='/home'"><span>Mua tiếp</span></button>
+</div>
+<div class="row" style="text-align: center">
+    <div class="col-30">
+        <label>Bìa sách</label>
+    </div>
+    <div class="col-20">
+        <label>Số lượng</label>
+    </div>
+    <div class="col-20">
+        <label>Giá</label>
+    </div>
+    <div class="col-20">
+        <label>Thành tiền</label>
+    </div>
+    <div class="col-10">
+        <label>Loại</label>
+    </div>
+</div>
+<div class="row" style="text-align: center;border-top: 1px solid #cccccc" th:each="i:${cartItem}">
+    <div class="col-30">
+        <img th:src="@{'data:image/jpg;base64,'+ ${i.getValue().image}}">
+    </div>
+    <div class="col-20">
+        <label th:text="${i.getValue().quantity}"></label>
+    </div>
+    <div class="col-20">
+        <label th:text="${i.getValue().cost}"></label>
+    </div>
+    <div class="col-20">
+        <label th:text="${i.getValue().price}"></label>
+    </div>
+    <div class="col-10">
+        <a th:href="@{'/home/cart/delete?Idcode='+${i.getKey()}}">Bỏ</a>
+    </div>
+</div>
+<div class="row" style="text-align: center;border-top: 1px solid #cccccc;">
+    <div class="col-70">
+        <label></label>
+    </div>
+    <div class="col-20">
+        <label th:text="${price}" id="pricee"></label>
+    </div>
+    <div class="col-10"><label>đ</label></div>
+</div>
+<div class="row" style="text-align: center;border-top: 1px solid #cccccc">
+    <div class="col-70">
+        <label>Phí vận chuyển</label>
+    </div>
+    <div class="col-20">
+        <label id="transport"></label>
+    </div>
+    <div class="col-10">
+        <label>đ</label>
+    </div>
+</div>
+<div class="row" style="text-align: center;border-top: 1px solid #cccccc">
+    <div class="col-70">
+        <label>Tổng cộng</label>
+    </div>
+    <div class="col-20">
+        <label id="total"></label>
+    </div>
+    <div class="col-10"><label>đ</label></div>
+
+
+</div>
+<script>
+    var price = document.getElementById("pricee").innerText;
+    if(price>150000){
+        document.getElementById("transport").innerHTML = '0';
+        document.getElementById("total").innerHTML = price;
+    }
+    else {
+        document.getElementById("transport").innerHTML = '15000';
+        document.getElementById("total").innerHTML = (parseFloat(price)+15000);
+    }
+</script>
+<footer>
+    <h2>NDT Book Store</h2>
+</footer>
+</body>
+</html>

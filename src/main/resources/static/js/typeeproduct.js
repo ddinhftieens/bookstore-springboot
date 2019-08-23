@@ -2,6 +2,17 @@ const type = {11:"Tiểu thuyết",12:"Trinh thám",13:"Hồi kí",14:"Kinh đi�
 var typee = document.getElementById("typee").innerText;
 document.getElementById("typee").innerHTML = type[typee];
 
+// var quantity = document.getElementById("state").innerText;
+// function quantityy() {
+//     if(quantity>0){
+//         return "Còn hàng";
+//     }
+//     else{
+//         return "Tạm thời hết hàng";
+//     }
+// }
+// document.getElementById("state").innerHTML = quantityy();
+
 
 // console.log(type[14]);
 // const object = {1:"Tien",2:"Nguyen",3:"Thanh",4:"Tra"};

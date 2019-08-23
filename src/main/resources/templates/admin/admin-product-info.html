@@ -18,10 +18,24 @@
         }
     </style>
 </head>
-<body class="header" style="text-align: center">
+<body style="text-align: center">
 <header>
     <h1>Quản lý sản phẩm</h1>
 </header>
+<div class="row" style="text-align: center;margin: 20px;margin-top: 50px">
+    <button class="button" onclick=" window.location.href = '/admin/customer-info' ">
+        <span>Quản lí khách hàng</span>
+    </button>
+    <button class="button" onclick=" window.location.href = '/admin/productmanager' ">
+        <span>Quản lí sản phẩm</span>
+    </button>
+    <button class="button" onclick=" window.location.href = '#3' ">
+        <span>Danh sách đơn hàng</span>
+    </button>
+    <button class="button" onclick=" window.location.href = '#4' ">
+        <span>Thay đổi thông tin</span>
+    </button>
+</div>
 <div style="float: right;margin: 10px">
     <form>
         <input type="text" placeholder="search by IDcode ..." id="searchproduct" name="searchproduct" style="font-size: 16px;padding: 8px">
@@ -38,7 +52,6 @@
         <tr>
             <th>IDCode</th>
             <th>Image</th>
-            <th>Author</th>
             <th>Cost</th>
             <th>Sale</th>
             <th>Quantity</th>
@@ -51,7 +64,6 @@
             <td>
                 <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
             </td>
-            <td th:text="${i.author}">...</td>
             <td th:text="${i.cost}">...</td>
             <td th:text="${i.sale}">...</td>
             <td th:text="${i.quantity}">...</td>

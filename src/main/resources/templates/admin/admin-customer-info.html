@@ -6,8 +6,24 @@
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
     <title>Customer Information</title>
 </head>
-<body class="header" style="text-align: center">
-<h1>Danh sách khách hàng</h1>
+<body style="text-align: center">
+<header>
+    <h1>Danh sách khách hàng</h1>
+</header>
+<div class="row" style="text-align: center;margin: 20px;margin-top: 50px">
+    <button class="button" onclick=" window.location.href = '/admin/customer-info' ">
+        <span>Quản lí khách hàng</span>
+    </button>
+    <button class="button" onclick=" window.location.href = '/admin/productmanager' ">
+        <span>Quản lí sản phẩm</span>
+    </button>
+    <button class="button" onclick=" window.location.href = '#3' ">
+        <span>Danh sách đơn hàng</span>
+    </button>
+    <button class="button" onclick=" window.location.href = '#4' ">
+        <span>Thay đổi thông tin</span>
+    </button>
+</div>
 <div style="float: right;margin: 10px">
     <form>
         <input type="text" placeholder="search by frist-name" id="search" name="search" style="font-size: 16px;padding: 8px">
@@ -40,5 +56,8 @@
         </tr>
     </table>
 </div>
+<footer>
+    <h2>NDT Book Store</h2>
+</footer>
 </body>
 </html>

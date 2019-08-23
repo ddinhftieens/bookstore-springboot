@@ -56,3 +56,81 @@ p{
 .table{
     width: 100%;
 }
+header {
+    background-color: orangered;
+    padding: 30px;
+    text-align: center;
+    font-size: xx-large;
+    color: white;
+}
+footer {
+    background-color: orangered;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+select{
+    font-family: "Times New Roman";
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    font-size: x-large;
+}
+@media (max-width: 600px) {
+    header{
+        font-size: x-large;
+    }
+    select{
+        font-size: large;
+        width: 100%;
+    }
+}
+.shelf{
+    background-image: url("../images/04.jpg");
+}
+.list{
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+}
+.list>ul{
+    padding: 20px;
+    display: inline-block;
+}
+.list >ul>li{
+    width: 200px;
+    height: 300px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+h1{
+    text-align: center;
+    padding-top: 20px;
+}
+img{
+    width: 110px;
+    height: 160px;
+}
+.list>ul>li>a>img{
+    text-align: center;
+    padding-top: 10px;
+}
+.list>ul>li>a{
+    text-decoration: none;
+}
+a{
+    color: black;
+}
+li a:hover{
+    color: orangered;
+    list-style-type: none;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

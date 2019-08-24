@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ddinhftieens.demo_crud.Model.CustomerDTO;
 import com.ddinhftieens.demo_crud.Service.CustomerService;
-import com.ddinhftieens.demo_crud.Service.AdminService;
 import com.ddinhftieens.demo_crud.Model.ProductDTO;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,11 +27,7 @@ public class CustomerController{
     @Qualifier("listproduct")
     private List<ProductDTO> productDTOList;
 
-//    @Autowired
-//    private AdminService adminService;
-
     private CustomerDTO customerDTO = null;
-//    private List<ProductDTO> productDTOList = new ArrayList<>();
 
     @GetMapping("/customer/login")
     public String login(Model model){
@@ -46,16 +41,17 @@ public class CustomerController{
             return "home";
         }
         else{
-            model.addAttribute("user",this.customerDTO.getIDcard());
+            model.addAttribute("user",this.customerDTO.getFristname()+this.customerDTO.getLastname());
             return "home";
         }
     }
 
     @PostMapping("/home")
-    public String checklogin(Model model,@ModelAttribute("customerDTO") CustomerDTO customerDTO){
+    public String checklogin(Model model, @ModelAttribute("customerDTO") CustomerDTO customerDTO, HttpSession session){
         int k = customerService.checklogin(customerDTO.getUsername(),customerDTO.getPassword());
         if(k==1){
             this.customerDTO = customerService.getByUserName(customerDTO.getUsername());
+            session.setAttribute("login",this.customerDTO);
             if(customerService.getByUserName(customerDTO.getUsername()).getRole().equals("Admin")){
                 return "redirect:/admin/home";
             }
@@ -112,8 +108,9 @@ public class CustomerController{
         }
     }
     @GetMapping("/customer/logout")
-    public String logout(){
+    public String logout(HttpSession session){
         this.customerDTO = null;
+        session.invalidate();
         return "redirect:/home";
     }
 }

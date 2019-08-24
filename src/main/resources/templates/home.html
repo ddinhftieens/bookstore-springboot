@@ -4,144 +4,127 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="icono.min.css">
     <title>Home</title>
     <style>
         footer {
             background-color: orangered;
-            padding: 10px;
+            padding: 5px;
             text-align: center;
             color: white;
+        }
+        body {font-family: Arial, Helvetica, sans-serif;}
+        .navbar {
+            text-align: right;
+            width: 100%;
+            background-color:#ffc46b;
+            overflow: auto;
+        }
+        .navbar a {
+            float: left;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover{
+            background-color: orangered;
+        }
+
+        .active {
+            background-color: orangered;
+        }
+
+        @media screen and (max-width: 690px) {
+            .navbar a{
+                float: none;
+                display: block;
+            }
+        }
+        .sidepanel  {
+            width: 0;
+            position: absolute;
+            z-index: 1;
+            background-color:#ff9935;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            padding-bottom: 10px;
+            right: 8px;
+        }
+
+        .sidepanel a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidepanel a:hover {
+            color: white;
+        }
+
+        .sidepanel .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
         }
     </style>
 </head>
 <body>
 <div class="header">
     <h1>NDT Book Store</h1>
-    <div class="container">
-        <nav class="menu">
-            <ul>
-                <li>
-                    <a th:href="@{'#newbook'}">Sách mới</a>
-                </li>
-                <li>
-                    <a href="#">Danh mục sách</a>
-                    <ul class="menu-child">
-                        <li>
-                            <a href="#">Văn học</a>
-                            <ul class="menu-child-child">
-                                <li>
-                                    <a th:href="@{'home/catalog?query=11'}">Tiểu thuyết</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=12'}">Trinh thám</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=13'}">Hồi kí</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=14'}">Kinh điển</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Thiếu nhi</a>
-                            <ul class="menu-child-child">
-                                <li>
-                                    <a th:href="@{'home/catalog?query=21'}">Truyện tranh</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=22'}">Truyện cổ tích</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Khoa học</a>
-                            <ul class="menu-child-child">
-                                <li>
-                                    <a th:href="@{'home/catalog?query=31'}">Thiên văn</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=32'}">Lịch sử</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=33'}">Sinh vật học</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=34'}">Triết học</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=35'}">Tâm lý học</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Kĩ năng sống</a>
-                            <ul class="menu-child-child">
-                                <li>
-                                    <a th:href="@{'home/catalog?query=41'}">Kinh nghiệm</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=42'}">Hướng nghiệp</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=43'}">Sáng tạo - Tư duy</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Ngoại ngữ</a>
-                            <ul class="menu-child-child">
-                                <li>
-                                    <a th:href="@{'home/catalog?query=51'}">Tiếng Anh</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=52'}">Tiếng Nhật</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'home/catalog?query=53'}">Tiếng Trung</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Sách bán chạy nhất</a>
-                </li>
-                <li>
-                    <a href="#" th:text="${user}?${user}:'Đăng nhập'" th:href="${user}?'#1':'/customer/login'"></a>
-                    <ul class="menu-child" th:if="${user}">
-                        <li>
-                            <a th:href="@{/customer/information}">Tài khoản</a>
-                        </li>
-                        <li>
-                            <a href="">Đơn hàng</a>
-                        </li>
-                        <li>
-                            <a href="">Lịch sử</a>
-                        </li>
-                        <li>
-                            <a th:href="@{/customer/logout}">Đăng xuất</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        <div style="text-align: center;">
-            <p>Chào mừng bạn tới NDT Book Store</p>
-            <h2>Sách là nguồn của cải quý báu của thế giới và là di sản xứng đáng của các thế hệ và các quốc gia. - Henry David Thoreau -</h2>
-            <h2>Đọc sách hay cũng giống như trò chuyện với các bộ óc tuyệt vời nhất của những thế kỷ đã trôi qua. - Rene Descartes -</h2>
-            <h2>Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn. - Barack Obama -</h2>
-        </div>
-
-        <div style="text-align: center;">
-            <button class="button" onclick="nextpage()"><span>Giỏ hàng</span></button>
-        </div>
-        <script type="text/javascript">
-            function nextpage() {
-                window.location.href = "/home/cart";
-            }
-        </script>
+    <div class="navbar">
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i>Home</a>
+        <a href="#">Sách mới</a>
+        <a th:href="@{'/home/catalog?query=00'}"></i>Danh mục</a>
+        <a href="#">Sách bán chạy nhất</a>
+        <a onclick="openNav()" style="float: right" th:text="${user}?${user}:'Login'" id="title"><i class="fa fa-fw fa-user"></i></a>
     </div>
+    <div id="mySidepanel" class="sidepanel">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="#" name="login">Đăng nhập</a>
+        <a href="#" style="display: none" name="userr">Thông tin</a>
+        <a href="#" style="display: none" name="userr">Đơn hàng</a>
+        <a href="#" style="display: none" name="userr">Lịch sử</a>
+        <a href="#" style="display: none" name="userr">Đăng xuất</a>
+    </div>
+    <script>
+        var title = document.getElementById("title").innerText;
+        if(title != 'Login'){
+            document.getElementsByName("userr").style.display = 'block';
+            document.getElementsByName("login").style.display = 'none';
+        }
+    </script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "200px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+    </script>
+    <div style="text-align: center;">
+        <p>Chào mừng bạn tới NDT Book Store</p>
+        <h2>Sách là nguồn của cải quý báu của thế giới và là di sản xứng đáng của các thế hệ và các quốc gia. - Henry David Thoreau -</h2>
+        <h2>Đọc sách hay cũng giống như trò chuyện với các bộ óc tuyệt vời nhất của những thế kỷ đã trôi qua. - Rene Descartes -</h2>
+        <h2>Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn. - Barack Obama -</h2>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="button" onclick="nextpage()"><span>Giỏ hàng</span></button>
+    </div>
+    <script type="text/javascript">
+        function nextpage() {
+            window.location.href = "/home/cart";
+        }
+    </script>
 </div>
 <!--<div class="shelf">-->
 <!--    <h1>Sách mới</h1>-->

@@ -39,7 +39,9 @@
     </script>
 </head>
 <body>
-<h1 id="001">Thông tin khách hàng</h1>
+<header>
+    <h2 id="001">Thông tin khách hàng</h2>
+</header>
 <form style="border: 1px solid #cccccc" id="002" th:action="@{/customer/update-information}" method="post" th:object="${customerDTO}">
     <div class="contain">
         <label><b>Ngày tạo</b></label>
@@ -92,5 +94,8 @@
         </div>
     </div>
 </form>
+<footer>
+    <h2>NDT Book Store</h2>
+</footer>
 </body>
 </html>

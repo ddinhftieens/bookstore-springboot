@@ -5,10 +5,8 @@ import com.ddinhftieens.demo_crud.Model.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.context.annotation.Bean;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @SpringBootApplication

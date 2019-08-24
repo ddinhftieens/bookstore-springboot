@@ -35,7 +35,9 @@
     </script>
 </head>
 <body>
-<h1>Đăng kí</h1>
+<header>
+    <h2>Đăng kí</h2>
+</header>
 <form style="border: 1px solid #ccc" th:action="@{/customer/register}" method="post" th:object="${customerDTO}">
     <div class="contain">
         <label><b>Tài khoản</b></label>
@@ -81,5 +83,8 @@
         </div>
     </div>
 </form>
+<footer>
+    <h2>NDT Book Store</h2>
+</footer>
 </body>
 </html>

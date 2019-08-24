@@ -12,7 +12,7 @@
     <h2 th:text="${title}" id="title"></h2>
 </header>
 <script>
-    const type = {11:"Tiểu thuyết",12:"Trinh thám",13:"Hồi kí",14:"Kinh điển",21:"Truyện tranh",22:"Truyện cổ tích",31:"Thiên văn",32:"Lịch sử",33:"Sinh vật học",34:"Tâm lí học",35:"Hiện tượng tự nhiên",41:"Kinh nghiệm",42:"Hướng nghiệp",43:"Sáng tạo - Tư duy",51:"Tiếng Anh",52:"Tiếng Nhật",53:"Tiếng Trung Quốc"};;
+    const type = {00:"NDT Book Store",11:"Tiểu thuyết",12:"Trinh thám",13:"Hồi kí",14:"Kinh điển",21:"Truyện tranh",22:"Truyện cổ tích",31:"Thiên văn",32:"Lịch sử",33:"Sinh vật học",34:"Tâm lí học",35:"Hiện tượng tự nhiên",41:"Kinh nghiệm",42:"Hướng nghiệp",43:"Sáng tạo - Tư duy",51:"Tiếng Anh",52:"Tiếng Nhật",53:"Tiếng Trung Quốc"};;
     var typee = document.getElementById("title").innerText;
     document.getElementById("title").innerHTML = type[typee];
 </script>
@@ -63,6 +63,7 @@
     </div>
     <div style="float: left; margin: 10px">
         <select id="fiter" name="fiter">
+            <option selected disabled hidden>Sắp xếp</option>
             <option value="low">Giá tăng dần</option>
             <option value="hight">Giá giảm dần</option>
             <option value="newbook">Ngày phát hành</option>
@@ -70,9 +71,6 @@
     </div>
 </div>
 <div class="shelf">
-<!--    <form th:action="@{/home}" style="text-align: center">-->
-<!--        <button class="button-search"><span>Giỏ hàng</span></button>-->
-<!--    </form>-->
     <nav class="list">
         <ul>
             <li th:each="i:${productList}">

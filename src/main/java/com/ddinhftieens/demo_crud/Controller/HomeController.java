@@ -1,5 +1,6 @@
 package com.ddinhftieens.demo_crud.Controller;
 
+import com.ddinhftieens.demo_crud.Model.CustomerDTO;
 import com.ddinhftieens.demo_crud.Model.ProductDTO;
 import com.ddinhftieens.demo_crud.Service.AdminService;
 import com.ddinhftieens.demo_crud.Service.HomeService;
@@ -53,7 +54,13 @@ public class HomeController {
 
     @GetMapping("/catalog")
     public String catalog(Model model,@RequestParam("query") String query){
-        model.addAttribute("productList",homeService.getbyType(query));
+        if(query.equals("00")){
+            model.addAttribute("productList",adminService.getAll());
+        }
+        else {
+            model.addAttribute("productList",homeService.getbyType(query));
+
+        }
         model.addAttribute("title",query);
         return "client/catalog";
     }
@@ -75,5 +82,29 @@ public class HomeController {
         cartItemDTOMap.remove(Idcode);
         session.setAttribute("cart",cartItemDTOMap);
         return "redirect:/home/cart?message=bo san pham thanh cong";
+    }
+    @GetMapping("/order")
+    public String order(Model model,HttpSession session){
+        Object object = session.getAttribute("cart");
+        if(object!=null){
+            Map<String,CartItemDTO> cartItemDTOMap = (Map<String, CartItemDTO>) object;
+            model.addAttribute("cartItem",cartItemDTOMap);
+            model.addAttribute("price",price);
+        }
+        return "client/order";
+    }
+    @PostMapping("/order")
+    public String confirm(@RequestParam("name") String name,HttpSession session){
+        System.out.println(name);
+        Object object = session.getAttribute("login");
+        if(object == null){
+            return "redirect:/customer/login";
+        }
+        else {
+            session.invalidate();
+            CustomerDTO customerDTO = (CustomerDTO) object;
+            System.out.println(customerDTO);
+            return "redirect:/home?message=dat hang thanh cong";
+        }
     }
 }

@@ -68,14 +68,6 @@ public class CustomerController{
         return "client/login";
     }
 
-//    @GetMapping("/NDTBookStore")
-//    public String NDTBookStore(HttpSession session){
-//        final String UserName = SecurityContextHolder.getContext().getAuthentication().getName();
-//        this.customerDTO = customerService.getByUserName(UserName);
-//        session.setAttribute("login",this.customerDTO);
-//        return "redirect:/home";
-//    }
-
     @GetMapping("/home")
     public String home(Model model,HttpSession session){
         model.addAttribute("productList",this.productDTOList);
@@ -96,7 +88,6 @@ public class CustomerController{
                 session.setAttribute("login",this.customerDTO);
                 session.setAttribute("user",this.customerDTO.getFristname()+this.customerDTO.getLastname());
             }
-//            model.addAttribute("user",this.customerDTO.getFristname()+this.customerDTO.getLastname());
             return "home";
         }
     }
@@ -150,7 +141,7 @@ public class CustomerController{
         }
     }
 
-    @PostMapping("/customer/change-pass")//error
+    @PostMapping("/customer/change-pass")
     public String changepass(@RequestParam("oldpassword") String old,@RequestParam("newpassword") String newp){
         if(customerService.changepass(passwordEncoder.encode(old),passwordEncoder.encode(newp),this.customerDTO.getUsername())==0){
             return "redirect:/customer/information?message=mat khau khong chinh xac";
@@ -167,7 +158,7 @@ public class CustomerController{
     }
 
 
-    @GetMapping("/customer/history-transaction")//error
+    @GetMapping("/customer/history-transaction")
     public String historytransaction(Model model,HttpSession session){
         if(session.getAttribute("login") == null){
             final String UserName = SecurityContextHolder.getContext().getAuthentication().getName();

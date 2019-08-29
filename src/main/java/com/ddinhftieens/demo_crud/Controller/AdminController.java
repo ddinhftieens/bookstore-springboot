@@ -30,10 +30,6 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-
-//    private final String UserName = SecurityContextHolder.getContext().getAuthentication().getName();
-//    private CustomerDTO customerDTOO = customerService.getByUserName(UserName);
-
     private List<CustomerDTO> customerDTO;
     private List<ProductDTO> productDTOList;
     private List<OrderDTO> orderDTOList;
@@ -58,9 +54,6 @@ public class AdminController {
     }
     @GetMapping("/productmanager")
     public String adminproduct(Model model,@ModelAttribute("searchproduct") String name,@ModelAttribute("fiter") String fiter,HttpSession session){
-//        if(session.getAttribute("user") == null){
-//            session.setAttribute("user",customerDTOO.getFristname()+customerDTOO.getLastname());
-//        }
         final String UserName = SecurityContextHolder.getContext().getAuthentication().getName();
         Object object = session.getAttribute("login");
         if(object==null){

@@ -1,22 +1,38 @@
 package com.ddinhftieens.demo_crud.Model;
 
 public class OrderDTO {
-    private int ID,quantity;
-    private String IDcode,address,phone,name,datecreated;
-    private float cost,price;
+    private int IDuser,ID;
+    private String IDcode,address,phone,name,datecreated,note,status;
+    private String cost,quantity,time;
+    private float price;
 
     public OrderDTO(){}
-
-    public String getIDcode() {
-        return IDcode;
-    }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
     public int getID() {
         return ID;
+    }
+    public String getIDcode() {
+        return IDcode;
+    }
+
+    public void setIDuser(int ID) {
+        this.IDuser = ID;
+    }
+
+    public int getIDuser() {
+        return IDuser;
     }
 
     public void setIDcode(String IDcode) {
@@ -43,6 +59,14 @@ public class OrderDTO {
         return name;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public void setDatecreated(String datecreated) {
         this.datecreated = datecreated;
     }
@@ -55,27 +79,36 @@ public class OrderDTO {
         return phone;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
-    public float getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(float cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    public float getPrice() {
-        return price;
+
+    public String getNote() {
+        return note;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

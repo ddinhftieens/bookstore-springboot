@@ -2,28 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Add Product</title>
     <style>
-        .container {
+        .containerr {
             border-radius: 5px;
             background-color: #f2f2f2;
             padding: 20px;
         }
-
-        .col-25 {
+        .col-30 {
             float: left;
             width: 30%;
             margin-top: 6px;
         }
-
-        .col-75 {
+        .col-70 {
             float: left;
             width: 70%;
             margin-top: 6px;
         }
-
         .row:after {
             content: "";
             display: table;
@@ -47,43 +49,39 @@
             padding: 12px 12px 12px 0;
             display: inline-block;
         }
-        .button {
-            border-radius: 4px;
-            background-color: #f4511e;
-            border: none;
-            color: #FFFFFF;
-            text-align: center;
-            font-size: 28px;
-            padding: 20px;
-            transition: all 0.5s;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .button span {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: 0.5s;
-        }
-
-        .button span:after {
-            content: '\00bb';
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            right: -20px;
-            transition: 0.5s;
-        }
-
-        .button:hover span {
-            padding-right: 25px;
-        }
-
-        .button:hover span:after {
-            opacity: 1;
-            right: 0;
-        }
+        /*.button {*/
+        /*    border-radius: 4px;*/
+        /*    background-color: #f4511e;*/
+        /*    border: none;*/
+        /*    color: #FFFFFF;*/
+        /*    text-align: center;*/
+        /*    font-size: 28px;*/
+        /*    padding: 20px;*/
+        /*    transition: all 0.5s;*/
+        /*    cursor: pointer;*/
+        /*    margin: 5px;*/
+        /*}*/
+        /*.button span {*/
+        /*    cursor: pointer;*/
+        /*    display: inline-block;*/
+        /*    position: relative;*/
+        /*    transition: 0.5s;*/
+        /*}*/
+        /*.button span:after {*/
+        /*    content: '\00bb';*/
+        /*    position: absolute;*/
+        /*    opacity: 0;*/
+        /*    top: 0;*/
+        /*    right: -20px;*/
+        /*    transition: 0.5s;*/
+        /*}*/
+        /*.button:hover span {*/
+        /*    padding-right: 25px;*/
+        /*}*/
+        /*.button:hover span:after {*/
+        /*    opacity: 1;*/
+        /*    right: 0;*/
+        /*}*/
         header {
             background-color: orangered;
             padding: 10px;
@@ -112,16 +110,17 @@
     </style>
 </head>
 <body>
-<header>
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
     <h2>Thêm sản phẩm</h2>
-</header>
-<div class="container">
+</div>
+<div class="containerr">
     <form th:object="${product}" th:action="@{/admin/post-product}" method="post" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-25">
+            <div class="col-30">
                 <label>Danh mục</label>
             </div>
-            <div class="col-75">
+            <div class="col-70">
                 <select id="category" name="category" th:field="*{typee}">
                     <optgroup label="Văn học">
                         <option value="11">Tiểu thuyết</option>
@@ -154,67 +153,64 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Tên sách</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Tên sách</label></div>
+            <div class="col-70">
                 <input type="text" id="name" name="name" placeholder="Tên sách" th:field="*{name}" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Tác giả</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Tác giả</label></div>
+            <div class="col-70">
                 <input type="text" id="author" name="author" placeholder="Tác giả" th:field="*{author}" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Dịch giả/Nhà phát hành</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Dịch giả/Nhà phát hành</label></div>
+            <div class="col-70">
                 <input type="text" id="translator" name="translator" placeholder="Dịch giả" th:field="*{translator}" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Ngày xuất bản</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Ngày xuất bản</label></div>
+            <div class="col-70">
                 <input type="date" id="dateissue" name="dateissue" placeholder="Tên sách" th:field="*{dateofissue}" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Số trang</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Số trang</label></div>
+            <div class="col-70">
                 <input type="text" id="number" name="number" placeholder="Số trang" th:field="*{numberpage}"required>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Mô tả</label></div>
-            <div class="col-75">
-                <textarea id="description" name="description" placeholder="Mô tả" style="height: 300px" th:field="*{description}"required></textarea>
+            <div class="col-30"><label>Mô tả</label></div>
+            <div class="col-70">
+                <textarea id="description" name="description" placeholder="Mô tả" style="height: 150px" th:field="*{description}"required></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Giá bán</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Giá bán</label></div>
+            <div class="col-70">
                 <input type="text" id="cost" name="cost" placeholder="Giá bán" th:field="*{cost}" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Giảm giá</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Giảm giá</label></div>
+            <div class="col-70">
                 <input type="text" id="sale" name="sale" placeholder="Giảm giá" th:field="*{sale}" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-25"><label>Số lượng</label></div>
-            <div class="col-75">
+            <div class="col-30"><label>Số lượng</label></div>
+            <div class="col-70">
                 <input type="text" id="quantity" name="quantity" placeholder="Số lượng" th:field="*{quantity}" required>
             </div>
         </div>
-        <div class="row">
-            <div class="col-25"><label>Ảnh bìa</label></div>
-            <div class="col-75">
-                <input type="file" id="imagee" name="imagee" placeholder="Image" required>
-            </div>
+        <div style="text-align: center;margin-top: 20px">
+            <input type="file" id="imagee" name="imagee" placeholder="Image" required>
         </div>
-        <div style="text-align: center">
-            <button class="button" style="width: 50%"><span>Lưu</span></button>
+        <div style="text-align: center;margin-top: 20px">
+            <button class="button" style="width: 50%">Lưu</button>
         </div>
     </form>
 </div>

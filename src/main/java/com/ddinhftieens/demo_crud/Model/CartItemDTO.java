@@ -52,6 +52,10 @@ public class CartItemDTO {
         return IDcode;
     }
 
+    public void setIDcode(String IDcode) {
+        this.IDcode = IDcode;
+    }
+
     @Override
     public String toString() {
         return IDcode + " " + image + " " + quantity + " " + cost + " " + price;

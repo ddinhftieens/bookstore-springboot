@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Transaction</title>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
+    <style>
+        @media (max-width: 600px) {
+            td{
+                font-size: small;
+            }
+        }
+    </style>
+</head>
+<body>
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
+    <h2>Lịch sử giao dịch</h2>
+</div>
+<div style="margin: 10px">
+    <table border="1" class="table">
+        <tr>
+            <th>STT</th>
+            <th>Ngày tạo</th>
+            <th>Thành tiền</th>
+            <th>Trạng thái</th>
+            <th>Chi tiết</th>
+        </tr>
+        <tr th:each="i,k : ${listorder}" style="font-size: x-large">
+            <td th:text="${k.index+1}"></td>
+            <td th:text="${i.datecreated}">...</td>
+            <td th:text="${i.price}">...</td>
+            <td th:text="${i.status}">...</td>
+            <td><a th:href="@{'/'+ ${rolee} +'/transaction/historydetail?ID=' + ${i.ID}}">Chi tiết</a></td>
+        </tr>
+    </table>
+</div>
+<footer>
+    <h2>NDT Book Store</h2>
+</footer>
+</body>
+</html>

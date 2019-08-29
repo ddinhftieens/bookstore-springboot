@@ -5,7 +5,7 @@ import javax.persistence.Table;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "shopTVH")
+@Table(name = "customer")
 public class CustomerEntity {
     @Id
     @Column(name = "ID",nullable = false)

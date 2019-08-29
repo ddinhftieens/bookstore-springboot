@@ -2,8 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <title>Product Manager</title>
     <style>
         header {
@@ -16,63 +21,93 @@
             text-align: center;
             color: white;
         }
+        @media (max-width: 600px) {
+            td{
+                font-size: small;
+            }
+        }
+        select{
+            font-family: "Times New Roman";
+            /*width: 100%;*/
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            /*font-size: small;*/
+        }
+        option{
+            font-size: larger;
+            padding: 10px;
+        }
     </style>
 </head>
 <body style="text-align: center">
-<header>
-    <h1>Quản lý sản phẩm</h1>
-</header>
-<div class="row" style="text-align: center;margin: 20px;margin-top: 50px">
-    <button class="button" onclick=" window.location.href = '/admin/customer-info' ">
-        <span>Quản lí khách hàng</span>
-    </button>
-    <button class="button" onclick=" window.location.href = '/admin/productmanager' ">
-        <span>Quản lí sản phẩm</span>
-    </button>
-    <button class="button" onclick=" window.location.href = '#3' ">
-        <span>Danh sách đơn hàng</span>
-    </button>
-    <button class="button" onclick=" window.location.href = '#4' ">
-        <span>Thay đổi thông tin</span>
-    </button>
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
+    <h2>Quản lí sản phẩm</h2>
 </div>
+<!--<div class="row" style="text-align: center;margin: 20px;margin-top: 50px">-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/customer-info' ">-->
+<!--        Quản lí khách hàng-->
+<!--    </button>-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/productmanager' ">-->
+<!--        Quản lí sản phẩm-->
+<!--    </button>-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/ordermanager' ">-->
+<!--        Danh sách đơn hàng-->
+<!--    </button>-->
+<!--</div>-->
 <div style="float: right;margin: 10px">
     <form>
-        <input type="text" placeholder="search by IDcode ..." id="searchproduct" name="searchproduct" style="font-size: 16px;padding: 8px">
-        <button class="button-search" ><span>Search</span></button>
+        <input type="text" placeholder="search by IDcode ..." id="searchproduct" name="searchproduct" style="/*font-size: 16px;*/padding: 8px">
+        <button class="button-search" >Search</button>
     </form>
 </div>
 <div style="float: left;margin: 10px">
     <form th:action="@{/admin/add-product}">
-        <button class="button-search" ><span>Add Product</span></button>
+        <button class="button-search" >Add product</button>
     </form>
 </div>
 <div style="margin: 10px">
     <table border="1" class="table">
         <tr>
-            <th>IDCode</th>
+<!--            <th>IDCode</th>-->
             <th>Image</th>
             <th>Cost</th>
             <th>Sale</th>
-            <th>Quantity</th>
-            <th>Date Created</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Num
+                <select style="width: 20px;padding: 5px" id="fiter" name="fiter" onchange="fiter()">
+                    <option selected disabled hidden></option>
+                    <option value="21">Giảm dần</option>
+                    <option value="12">Tăng dần</option>
+                </select>
+            </th>
+<!--            <th>Date Created</th>-->
+<!--            <th>Edit</th>-->
+            <th>Del</th>
         </tr>
         <tr th:each="i : ${listProduct}" style="font-size: x-large">
-            <td th:text="${i.IDcode}">...</td>
-            <td>
-                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-            </td>
+            <td><a th:href="@{'/admin/editproduct?ID=' + ${i.IDcode}}" ><img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}"></a></td>
+<!--            <td th:text="${i.IDcode}">...</td>-->
+<!--            <td>-->
+<!--                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
+<!--            </td>-->
             <td th:text="${i.cost}">...</td>
             <td th:text="${i.sale}">...</td>
             <td th:text="${i.quantity}">...</td>
-            <td th:text="${i.datecreated}">...</td>
-            <td><a th:href="@{'/admin/editproduct?ID=' + ${i.IDcode}}">Edit</a></td>
-            <td><a th:href="@{'/admin/deleteproduct?ID=' + ${i.IDcode}}">Delete</a></td>
+<!--            <td th:text="${i.datecreated}">...</td>-->
+<!--            <td><a th:href="@{'/admin/editproduct?ID=' + ${i.IDcode}}" th:text="${i.IDcode}">...</a></td>-->
+            <td><a th:href="@{'/admin/deleteproduct?ID=' + ${i.IDcode}}"><i class="icono-cross"></i></a></td>
         </tr>
     </table>
 </div>
+<script>
+    function fiter() {
+        var query = document.getElementById("fiter").value;
+        window.location.href = '/admin/productmanager?fiter='+query;
+    }
+</script>
 <footer>
     <h2>NDT Book Store</h2>
 </footer>

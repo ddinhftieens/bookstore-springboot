@@ -3,6 +3,7 @@ package com.ddinhftieens.demo_crud.DAO.impl;
 import com.ddinhftieens.demo_crud.DAO.CustomerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.ddinhftieens.demo_crud.Model.CustomerDTO;
@@ -16,6 +17,8 @@ import java.util.List;
 public class CustomerDAOImpl implements CustomerDAO {
 
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setDataScoure(DataSource dataScoure){
@@ -44,7 +47,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public void add(CustomerDTO customerDTO) {
         String sql = "insert into customer (FristName, LastName, UserName, PassWord, Gender, Address, Email, IDcard, Phone, Role, DateofBrith,JoinDate) values (?,?,?,?,?,?,?,?,?,?,?,?)";
-        this.jdbcTemplate.update(sql,new Object[]{customerDTO.getFristname(),customerDTO.getLastname(),customerDTO.getUsername(),customerDTO.getPassword(),customerDTO.getGender(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getIDcard(),customerDTO.getPhone(),"Customer",customerDTO.getDateofbrith(),customerDTO.getJoindate()});
+        this.jdbcTemplate.update(sql,new Object[]{customerDTO.getFristname(),customerDTO.getLastname(),customerDTO.getUsername(),customerDTO.getPassword(),customerDTO.getGender(),customerDTO.getAddress(),customerDTO.getEmail(),customerDTO.getIDcard(),customerDTO.getPhone(),"ROLE_USER",customerDTO.getDateofbrith(),customerDTO.getJoindate()});
     }
 
     @Override
@@ -89,4 +92,5 @@ public class CustomerDAOImpl implements CustomerDAO {
         String sql = "update customer set PassWord = ? where PassWord = ? and UserName = ?";
         return this.jdbcTemplate.update(sql,new Object[]{newp,old,user});
     }
+
 }

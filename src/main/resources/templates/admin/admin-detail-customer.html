@@ -5,14 +5,18 @@
     <title>CustomerInformation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <link rel="stylesheet" type="text/css" media="screen">
     <style>
         *{
             box-sizing: border-box;
         }
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+        /*body {*/
+        /*    font-family: Arial, Helvetica, sans-serif;*/
+        /*}*/
         header {
             background-color: orangered;
             padding: 10px;
@@ -20,7 +24,7 @@
             font-size: x-large;
             color: white;
         }
-        div{
+        .div{
             float: left;
             width: 30%;
             padding: 20px;
@@ -43,13 +47,13 @@
             text-align: center;
             color: white;
         }
-        img{
+        .imgg{
             width: 200px;
             height: 200px;
         }
 
         @media (max-width: 600px) {
-            div, article {
+            .div, article {
                 width: 100%;
                 height: auto;
             }
@@ -60,12 +64,13 @@
     </style>
 </head>
 <body th:object="${customer}">
-<header>
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px;width: 100%">
     <h2>Thông tin khách hàng</h2>
-</header>
+</div>
 <section style="background-color: #cccccc">
-    <div style="text-align: center;">
-        <img th:src="@{/images/avatar.png}">
+    <div style="text-align: center" class="div">
+        <img class="imgg" th:src="@{/images/avatar.png}">
     </div>
     <article>
         <h2>ID</h2>

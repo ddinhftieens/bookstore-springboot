@@ -2,8 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <title>CustomerInformation</title>
     <script>
         function changepassword() {
@@ -39,6 +44,7 @@
     </script>
 </head>
 <body>
+<div th:replace="home :: header"></div>
 <header>
     <h2 id="001">Thông tin khách hàng</h2>
 </header>
@@ -74,12 +80,14 @@
         <br><br><label><b>Số CMND/CCCD </b></label>
         <input type="text" th:value="${customerDTO.getIDcard()}" id="IDcard" value="Số CMND/CCCD" name="IDcard" disabled>
         <div class="clearfix">
-            <button type="submit" id="save" class="saveIF">Lưu</button>
-            <button type="button" id="updatepass" class="updatepass" onclick="changepassword()">Đổi mật khẩu</button>
+            <button type="submit" id="save" class="saveIF button-log">Lưu</button>
+            <button type="button" id="updatepass" class="updatepass button-log" onclick="changepassword()">Đổi mật khẩu</button>
         </div>
     </div>
 </form>
-<h1 style="display: none" id="003">Đổi mật khẩu</h1>
+<header style="display: none" id="003">
+    <h1 >Đổi mật khẩu</h1>
+</header>
 <form id="004" style="border: 1px solid #cccccc;display: none" th:action="@{/customer/change-pass}" method="post">
     <div class="contain">
         <label><b>Mật khẩu cũ</b></label>
@@ -89,8 +97,8 @@
         <label><b>Xác nhận mật khẩu mới</b></label>
         <input type="password" placeholder="Nhập lại mật khẩu mới" id="enterpassword" name="enterpassword" required>
         <div class="clearfix">
-            <button type="button" id="cancelbtn" class="updatepass" onclick="cancelpassword()">Hủy</button>
-            <button type="submit" id="savebtn" class="saveIF">Lưu</button>
+            <button type="button" id="cancelbtn" class="updatepass button-log" onclick="cancelpassword()">Hủy</button>
+            <button type="submit" id="savebtn" class="saveIF button-log">Lưu</button>
         </div>
     </div>
 </form>

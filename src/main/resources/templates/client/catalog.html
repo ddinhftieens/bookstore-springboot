@@ -2,34 +2,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <script th:src="@{/js/catalog-onchange.js}"></script>
+    <style>
+        select{
+            font-family: "Times New Roman";
+            /*padding: 12px;*/
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            /*font-size: x-large;*/
+        }
+        option{
+            font-size: larger;
+        }
+    </style>
     <title>Product</title>
 </head>
 <body>
-<header>
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
     <h2 th:text="${title}" id="title"></h2>
-</header>
+</div>
 <script>
-    const type = {00:"NDT Book Store",11:"Tiểu thuyết",12:"Trinh thám",13:"Hồi kí",14:"Kinh điển",21:"Truyện tranh",22:"Truyện cổ tích",31:"Thiên văn",32:"Lịch sử",33:"Sinh vật học",34:"Tâm lí học",35:"Hiện tượng tự nhiên",41:"Kinh nghiệm",42:"Hướng nghiệp",43:"Sáng tạo - Tư duy",51:"Tiếng Anh",52:"Tiếng Nhật",53:"Tiếng Trung Quốc"};;
+    const type = {100:"NDT Book Store",11:"Tiểu thuyết",12:"Trinh thám",13:"Hồi kí",14:"Kinh điển",21:"Truyện tranh",22:"Truyện cổ tích",31:"Thiên văn",32:"Lịch sử",33:"Sinh vật học",34:"Tâm lí học",35:"Hiện tượng tự nhiên",41:"Kinh nghiệm",42:"Hướng nghiệp",43:"Sáng tạo - Tư duy",51:"Tiếng Anh",52:"Tiếng Nhật",53:"Tiếng Trung Quốc"};;
     var typee = document.getElementById("title").innerText;
     document.getElementById("title").innerHTML = type[typee];
 </script>
 <div class="row">
     <div style="float: right;margin: 10px">
         <form>
-            <input type="text" placeholder="search book ..." id="searchproduct" name="searchproduct" style="font-size: 16px;padding: 8px">
-            <button class="button-search" ><span>Search</span></button>
+            <input type="text" placeholder="search book ..." id="searchproduct" name="searchproduct" style="/*font-size: 16px;*/padding: 8px">
+            <button class="button-search" >Search</button>
         </form>
     </div>
-    <div style="float: right;margin: 10px">
-        <button class="button-search" onclick="window.location.href='/home'"><span>Home</span></button>
-    </div>
-    <div style="float: right;margin: 10px">
-        <button class="button-search" onclick="window.location.href='/home/cart'"><span>Giỏ hàng</span></button>
-    </div>
-    <div style="float: left; margin: 10px">
+<!--    <div style="float: right;margin: 10px">-->
+<!--        <button class="button-search" onclick="window.location.href='/home'">Home</button>-->
+<!--    </div>-->
+<!--    <div style="float: right;margin: 10px">-->
+<!--        <button class="button-search" onclick="window.location.href='/home/cart'">Giỏ hàng</button>-->
+<!--    </div>-->
+    <div style="float: left; margin-top: 10px;margin-bottom: 10px">
         <select id="catagory" name="catagory" onchange="catalog()">
             <option selected disabled hidden>Danh mục</option>
             <optgroup label="Văn học">
@@ -61,7 +81,7 @@
             </optgroup>
         </select>
     </div>
-    <div style="float: left; margin: 10px">
+    <div style="float: left; margin-top: 10px;margin-bottom: 10px">
         <select id="fiter" name="fiter">
             <option selected disabled hidden>Sắp xếp</option>
             <option value="low">Giá tăng dần</option>
@@ -71,17 +91,15 @@
     </div>
 </div>
 <div class="shelf">
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a th:href="@{'/home/product?ID=' + ${i.IDcode}+'&query='+${i.typee}}">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price}+'đ'"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <div class="row">
+        <div class="cell" th:each="i:${productList}">
+            <a th:href="@{'/home/product?ID=' + ${i.IDcode}+'&query='+${i.typee}}">
+                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
+                <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                <h2 th:text="${i.price} + 'đ'"></h2>
+            </a>
+        </div>
+    </div>
 </div>
 <footer>
     <h2>NDT Book Store</h2>

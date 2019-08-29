@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Chi tiết</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Order</title>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
+    <style>
+        @media (max-width: 600px) {
+            td{
+                font-size: large;
+            }
+            th{
+                font-size: large;
+            }
+        }
+    </style>
 </head>
 <body>
-
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
+    <h2>Danh sách đơn hàng</h2>
+</div>
+<!--<div class="row" style="text-align: center;margin: 20px;margin-top: 50px">-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/customer-info' ">-->
+<!--        <span>Quản lí khách hàng</span>-->
+<!--    </button>-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/productmanager' ">-->
+<!--        <span>Quản lí sản phẩm</span>-->
+<!--    </button>-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/ordermanager' ">-->
+<!--        <span>Danh sách đơn hàng</span>-->
+<!--    </button>-->
+<!--</div>-->
+<div style="float: right;margin: 10px">
+    <form>
+        <input type="date" placeholder="search by date ..." id="searchorder" name="searchorder" style="font-size: 16px;padding: 8px">
+        <button class="button-search" >Search</button>
+    </form>
+</div>
+<div style="margin: 10px">
+    <table border="1" class="table">
+        <tr style="font-size: x-large">
+            <th>STT</th>
+            <th>ID</th>
+            <th>Date Created</th>
+<!--            <th>Name</th>-->
+<!--            <th>Phone</th>-->
+            <th>Status</th>
+            <th>Confirm</th>
+        </tr>
+        <tr th:each="i,k : ${orderlist}" style="font-size: x-large">
+            <td th:text="${k.index+1}">...</td>
+            <td><a th:href="@{'/admin/showcustomer?ID=' + ${i.IDuser}}" th:text="${i.IDuser}">...</a></td>
+            <td th:text="${i.datecreated}">...</td>
+<!--            <td th:text="${i.name}">...</td>-->
+<!--            <td th:text="${i.phone}">...</td>-->
+            <td th:text="${i.status}">...</td>
+            <td><a th:href="@{'/admin/confirmorder?ID=' + ${i.ID}}">Confirm</a></td>
+        </tr>
+    </table>
+</div>
+<footer>
+    <h2>NDT Book Store</h2>
+</footer>
 </body>
 </html>

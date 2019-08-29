@@ -2,9 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order</title>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/radiobutton.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <style>
         .col-20{
             float: left;
@@ -59,6 +64,7 @@
 
         }
         input[type=text]{
+            font-family: "Times New Roman";
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -66,19 +72,30 @@
             border: 1px solid #cccccc;
             box-sizing: border-box;
         }
+        textarea{
+            font-family: "Times New Roman";
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            font-size: x-large;
+        }
     </style>
 </head>
 <body>
-<header>
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
     <h2>Đặt hàng</h2>
-</header>
+</div>
 <form method="post">
     <div class="row">
         <div class="col-25">
             <label>Người nhận</label>
         </div>
         <div class="col-75">
-            <input type="text" placeholder="Người nhận" required id="name" name="name">
+            <input type="text" placeholder="Người nhận" id="name" name="name" required>
         </div>
     </div>
     <div class="row">
@@ -86,7 +103,7 @@
             <label>Số điện thoại</label>
         </div>
         <div class="col-75">
-            <input type="text" placeholder="Số điện thoại" required>
+            <input type="text" placeholder="Số điện thoại" id="phone" name="phone" required>
         </div>
     </div>
     <div class="row">
@@ -96,50 +113,50 @@
         <div class="col-75 row">
             <div class="col-50 row">
                 <div class="col-30">
-                    <label style="font-size: larger; margin-left: 3px">Số nhà</label>
+<!--                    <label style="font-size: larger; margin-left: 3px">Số nhà</label>-->
                 </div>
                 <div class="col-70">
-                    <input type="text" placeholder="Số nhà">
+                    <input type="text" placeholder="Số nhà" id="apartmentnumber" name="apartmentnumber">
                 </div>
             </div>
             <div class="col-50 row">
                 <div class="col-30">
-                    <label style="font-size: larger; margin-left: 3px">Xóm/Ngõ</label>
+<!--                    <label style="font-size: larger; margin-left: 3px">Xóm/Ngõ</label>-->
                 </div>
                 <div class="col-70">
-                    <input type="text" placeholder="Xóm/Ngõ">
+                    <input type="text" placeholder="Xóm/Ngõ" id="neighbors" name="neighbors">
                 </div>
             </div>
             <div class="col-50 row">
                 <div class="col-30">
-                    <label style="font-size: larger; margin-left: 3px">Thôn</label>
+<!--                    <label style="font-size: larger; margin-left: 3px">Thôn</label>-->
                 </div>
                 <div class="col-70">
-                    <input type="text" placeholder="Thôn" required>
+                    <input type="text" placeholder="Thôn" id="village" name="village" required>
                 </div>
             </div>
             <div class="col-50 row">
                 <div class="col-30">
-                    <label style="font-size: larger; margin-left: 3px">Xã/Thị trấn</label>
+<!--                    <label style="font-size: larger; margin-left: 3px">Xã/Thị trấn</label>-->
                 </div>
                 <div class="col-70">
-                    <input type="text" placeholder="Xã/Thị trấn">
+                    <input type="text" placeholder="Xã/Thị trấn" id="town" name="town" required>
                 </div>
             </div>
             <div class="col-50 row">
                 <div class="col-30">
-                    <label style="font-size: larger; margin-left: 3px">Quận/Huyện</label>
+<!--                    <label style="font-size: larger; margin-left: 3px">Quận/Huyện</label>-->
                 </div>
                 <div class="col-70">
-                    <input type="text" placeholder="Quận/Huyện" required>
+                    <input type="text" placeholder="Quận/Huyện" id="township" name="township" required>
                 </div>
             </div>
             <div class="col-50 row">
                 <div class="col-30">
-                    <label style="font-size: larger; margin-left: 3px">Tỉnh/Thành phố</label>
+<!--                    <label style="font-size: larger; margin-left: 3px">Tỉnh/Thành phố</label>-->
                 </div>
                 <div class="col-70">
-                    <input type="text" placeholder="Tỉnh/Thành phố" required>
+                    <input type="text" placeholder="Tỉnh/Thành phố" id="city" name="city" required>
                 </div>
             </div>
         </div>
@@ -163,10 +180,26 @@
             </div>
         </div>
     </div>
-    <div class="col-100" style="text-align: center">
-        <label>Đơn hàng</label>
+    <div class="row">
+        <div class="col-25">
+            <label>Ghi chú</label>
+        </div>
+        <div class="col-75">
+            <textarea id="note" name="note" placeholder="Ghi chú" style="height: 300px"></textarea>
+        </div>
     </div>
-    <div class="row" style="text-align: center">
+    <div class="row">
+        <div class="col-25">
+            <label>Thời gian dự kiến giao hàng</label>
+        </div>
+        <div class="col-75">
+            <label th:text="${time}"></label>
+        </div>
+    </div>
+    <div class="col-100" style="text-align: center;background-color: orangered;color: white">
+        <h2>Đơn hàng</h2>
+    </div>
+    <div class="row" style="text-align: center;margin-top: 30px">
         <div class="col-10">
             <label>STT</label>
         </div>
@@ -183,7 +216,7 @@
             <label>Thành tiền</label>
         </div>
     </div>
-    <div class="row" style="text-align: center;border-top: 1px solid #cccccc" th:each="i,k:${cartItem}">
+    <div class="row" style="text-align: center;border-top: 1px solid #cccccc;margin-top: 15px" th:each="i,k:${cartItem}">
         <div class="col-10">
             <label th:text="${k.index + 1}"></label>
         </div>
@@ -200,16 +233,16 @@
             <label th:text="${i.getValue().price}"></label>
         </div>
     </div>
-    <div class="row" style="text-align: center;border-top: 1px solid #cccccc;">
+    <div class="row" style="text-align: center;border-top: 1px solid #cccccc;margin-top: 30px">
         <div class="col-70">
-            <label></label>
+            <label>Tạm tính</label>
         </div>
         <div class="col-20">
             <label th:text="${price}" id="pricee"></label>
         </div>
         <div class="col-10"><label>đ</label></div>
     </div>
-    <div class="row" style="text-align: center;border-top: 1px solid #cccccc">
+    <div class="row" style="text-align: center;border-top: 1px solid #cccccc;margin-top: 15px">
         <div class="col-70">
             <label>Phí vận chuyển</label>
         </div>
@@ -220,7 +253,7 @@
             <label>đ</label>
         </div>
     </div>
-    <div class="row" style="text-align: center;border-top: 1px solid #cccccc">
+    <div class="row" style="text-align: center;border-top: 1px solid #cccccc;margin-top: 15px">
         <div class="col-70">
             <label>Tổng cộng</label>
         </div>
@@ -232,15 +265,15 @@
     <script>
         var price = document.getElementById("pricee").innerText;
         if(price>150000){
-            document.getElementById("transport").innerHTML = '0';
+            document.getElementById("transport").innerHTML = '0.0';
             document.getElementById("total").innerHTML = price;
         }
         else {
-            document.getElementById("transport").innerHTML = '15000';
-            document.getElementById("total").innerHTML = (parseFloat(price)+15000);
+            document.getElementById("transport").innerHTML = '15000.0';
+            document.getElementById("total").innerHTML = (parseFloat(price)+15000.0);
         }
     </script>
-    <div class="row" style="text-align: center">
+    <div class="row" style="text-align: center;margin-top: 30px">
         <button class="button-search" type="submit">Hoàn tất</button>
     </div>
 </form>

@@ -7,7 +7,7 @@ input[type=text],input[type=password],input[type=email]{
     border: 1px solid #cccccc;
     box-sizing: border-box;
 }
-button{
+.button-log{
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;

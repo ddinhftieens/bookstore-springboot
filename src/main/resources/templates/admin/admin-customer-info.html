@@ -2,32 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/admin.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <title>Customer Information</title>
 </head>
 <body style="text-align: center">
-<header>
-    <h1>Danh sách khách hàng</h1>
-</header>
-<div class="row" style="text-align: center;margin: 20px;margin-top: 50px">
-    <button class="button" onclick=" window.location.href = '/admin/customer-info' ">
-        <span>Quản lí khách hàng</span>
-    </button>
-    <button class="button" onclick=" window.location.href = '/admin/productmanager' ">
-        <span>Quản lí sản phẩm</span>
-    </button>
-    <button class="button" onclick=" window.location.href = '#3' ">
-        <span>Danh sách đơn hàng</span>
-    </button>
-    <button class="button" onclick=" window.location.href = '#4' ">
-        <span>Thay đổi thông tin</span>
-    </button>
+<div th:replace="home :: header"></div>
+<div style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
+    <h2>Danh sách khách hàng</h2>
 </div>
+<!--<div class="row" style="text-align: center;margin: 20px;margin-top: 50px">-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/customer-info' ">-->
+<!--        Quản lí khách hàng-->
+<!--    </button>-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/productmanager' ">-->
+<!--        Quản lí sản phẩm-->
+<!--    </button>-->
+<!--    <button class="button" onclick=" window.location.href = '/admin/ordermanager' ">-->
+<!--        Danh sách đơn hàng-->
+<!--    </button>-->
+<!--</div>-->
 <div style="float: right;margin: 10px">
     <form>
         <input type="text" placeholder="search by frist-name" id="search" name="search" style="font-size: 16px;padding: 8px">
-        <button class="button-search" ><span>Search</span></button>
+        <button class="button-search" >Search</button>
     </form>
 </div>
 <div style="margin: 10px">
@@ -36,21 +40,22 @@
             <th>ID</th>
             <th>Tên</th>
             <th>Ngày tạo</th>
-            <th>Ngày sinh</th>
-            <th>Địa chỉ</th>
+<!--            <th>Ngày sinh</th>-->
+<!--            <th>Địa chỉ</th>-->
             <th>Số điện thoại</th>
-            <th>Chi tiết</th>
+<!--            <th>Chi tiết</th>-->
             <th>Lịch sử giao dịch</th>
             <th>Xóa</th>
         </tr>
         <tr th:each="i : ${customerDTO}">
             <td th:text="${i.ID}">...</td>
-            <td th:text="${i.fristname}">...</td>
+            <td><a th:href="@{'/admin/showcustomer?ID=' + ${i.ID}}" th:text="${i.fristname}">...</a></td>
+<!--            <td th:text="${i.fristname}">...</td>-->
             <td th:text="${i.joindate}">...</td>
-            <td th:text="${i.dateofbrith}">...</td>
-            <td th:text="${i.address}">...</td>
+<!--            <td th:text="${i.dateofbrith}">...</td>-->
+<!--            <td th:text="${i.address}">...</td>-->
             <td th:text="${i.phone}">...</td>
-            <td><a th:href="@{'/admin/showcustomer?ID=' + ${i.ID}}">Chi tiết</a></td>
+<!--            <td><a th:href="@{'/admin/showcustomer?ID=' + ${i.ID}}" th:text="${i.fristname}">Chi tiết</a></td>-->
             <td><a th:href="@{'/admin/transaction?ID=' + ${i.ID}}">Giao dịch</a></td>
             <td><a th:href="@{'/admin/delete?ID=' + ${i.ID}}">Xóa</a></td>
         </tr>

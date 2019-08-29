@@ -5,6 +5,10 @@
     <title>Product</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <link rel="stylesheet" type="text/css" media="screen">
     <style>
         *{
@@ -20,17 +24,10 @@
             resize: vertical;
             font-size: x-large;
         }
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        header {
-            background-color: orangered;
-            padding: 10px;
-            text-align: center;
-            font-size: x-large;
-            color: white;
-        }
-        div{
+        /*body {*/
+        /*    font-family: Arial, Helvetica, sans-serif;*/
+        /*}*/
+        .div{
             float: left;
             width: 30%;
             padding: 20px;
@@ -53,13 +50,13 @@
             text-align: center;
             color: white;
         }
-        img{
-            width: 110px;
-            height: 160px;
-        }
+        /*img{*/
+        /*    width: 110px;*/
+        /*    height: 160px;*/
+        /*}*/
 
         @media (max-width: 600px) {
-            div, article {
+            .div, article {
                 width: 100%;
                 height: auto;
             }
@@ -70,7 +67,7 @@
                 font-size: large;
             }
         }
-        button{
+        .buttonn{
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
@@ -82,11 +79,12 @@
     </style>
 </head>
 <body th:object="${product}">
-<header>
+<div th:replace="home :: header"></div>
+<header style="background-color: orangered;color: white;margin-top: 30px;text-align: center;padding: 10px">
     <h2>Thông tin sản phẩm</h2>
 </header>
 <section style="background-color: #cccccc">
-    <div style="text-align: center;">
+    <div style="text-align: center" class="div">
         <img th:src="@{'data:image/jpg;base64,'+ ${product.imagebase64}}">
     </div>
     <form method="post">
@@ -113,8 +111,18 @@
             <label th:text="${product.getPrice()}" style="color: orangered"></label>
             <h2 style="color: orangered">Trạng thái</h2>
             <label th:text="${product.getQuantity()}" id="state" style="color:orangered"></label>
+            <h2>Danh mục</h2>
+            <label th:text="${product.getTypee()}" id="typee"></label>
+            <h2 id="labelquantity">Số lượng</h2>
+            <input type="number" id="quantity" name="quantity" required>
+            <button type="submit" id="addcart" class="buttonn">Thêm vào giỏ hàng</button>
             <script>
                 var quantity = document.getElementById("state").innerText;
+                if(quantity == 0){
+                    document.getElementById("quantity").style.display = 'none';
+                    document.getElementById("addcart").style.display = 'none';
+                    document.getElementById("labelquantity").style.display = 'none';
+                }
                 function quantityy() {
                     if(quantity>0){
                         return "Còn hàng";
@@ -125,11 +133,6 @@
                 }
                 document.getElementById("state").innerHTML = quantityy();
             </script>
-            <h2>Danh mục</h2>
-            <label th:text="${product.getTypee()}" id="typee"></label>
-            <h2>Số lượng</h2>
-            <input type="number" id="quantity" name="quantity" required>
-            <button type="submit">Thêm vào giỏ hàng</button>
         </article>
     </form>
 </section>

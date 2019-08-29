@@ -1,6 +1,8 @@
 package com.ddinhftieens.demo_crud.DAO.impl;
 
 import com.ddinhftieens.demo_crud.DAO.AdminDAO;
+import com.ddinhftieens.demo_crud.Model.OrderDTO;
+import com.ddinhftieens.demo_crud.Model.OrderRowMapper;
 import com.ddinhftieens.demo_crud.Model.ProductDTO;
 import com.ddinhftieens.demo_crud.Model.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,17 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
+    public List<ProductDTO> getAlltype(int type) {
+        String sql = "select * from product where Type like "+ "'" + type + "%'";
+        List<ProductDTO> productDTOList = this.jdbcTemplate.query(sql, new ProductRowMapper());
+        for(ProductDTO i:productDTOList){
+            i.setImagebase64(Base64.getEncoder().encodeToString(i.getImage()));
+            i.setPrice(i.getCost() - (i.getCost()*i.getSale())/100);
+        }
+        return productDTOList;
+    }
+
+    @Override
     public ProductDTO getIDcode(String IDcode) {
         String sql = "select * from product where IDcode = '" + IDcode + "'";
         ProductDTO productDTO = (ProductDTO) this.jdbcTemplate.queryForObject(sql,new ProductRowMapper());
@@ -58,5 +71,24 @@ public class AdminDAOImpl implements AdminDAO {
     public void updateproduct(ProductDTO productDTO) {
         String sql = "update product set Cost = ?, Sale = ?, Quantity = ? where IDcode = ?";
         this.jdbcTemplate.update(sql,new Object[]{productDTO.getCost(),productDTO.getSale(),productDTO.getQuantity(),productDTO.getIDcode()});
+    }
+
+    @Override
+    public List<OrderDTO> getAllorder() {
+        String sql = "select * from listorder";
+        List<OrderDTO> orderDTOList = this.jdbcTemplate.query(sql,new OrderRowMapper());
+        return orderDTOList;
+    }
+
+    @Override
+    public OrderDTO getByID(int ID) {
+        String sql = "select * from listorder where ID = " + ID;
+        return (OrderDTO) this.jdbcTemplate.queryForObject(sql,new OrderRowMapper());
+    }
+
+    @Override
+    public void updatestatus(String status, int ID) {
+        String sql = "update listorder set Status = ? where ID = ?";
+        this.jdbcTemplate.update(sql,new Object[]{status,ID});
     }
 }

@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/home.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="icono.min.css">
-    <title>Home</title>
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/css/header.css}">
     <style>
         footer {
             background-color: orangered;
@@ -14,96 +15,70 @@
             text-align: center;
             color: white;
         }
-        body {font-family: Arial, Helvetica, sans-serif;}
-        .navbar {
-            text-align: right;
-            width: 100%;
-            background-color:#ffc46b;
-            overflow: auto;
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
         }
-        .navbar a {
+        .col-50{
             float: left;
-            padding: 12px;
-            color: white;
-            text-decoration: none;
-            font-size: 17px;
+            width: 50%;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
-
-        .navbar a:hover{
-            background-color: orangered;
+        .col-10{
+            float: left;
+            width: 10%;
+            padding-left: 10px;
         }
-
-        .active {
-            background-color: orangered;
-        }
-
-        @media screen and (max-width: 690px) {
-            .navbar a{
-                float: none;
-                display: block;
-            }
-        }
-        .sidepanel  {
-            width: 0;
-            position: absolute;
-            z-index: 1;
-            background-color:#ff9935;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            padding-bottom: 10px;
-            right: 8px;
-        }
-
-        .sidepanel a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidepanel a:hover {
-            color: white;
-        }
-
-        .sidepanel .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
+        .col-70{
+            float: left;
+            width: 70%;
+            padding-left: 10px;
+            margin-top: 10px;
         }
     </style>
+    <title>Home</title>
 </head>
 <body>
-<div class="header">
+<div class="header" th:fragment="header">
     <h1>NDT Book Store</h1>
     <div class="navbar">
         <a class="active" href="#"><i class="fa fa-fw fa-home"></i>Home</a>
-        <a href="#">Sách mới</a>
-        <a th:href="@{'/home/catalog?query=00'}"></i>Danh mục</a>
-        <a href="#">Sách bán chạy nhất</a>
-        <a onclick="openNav()" style="float: right" th:text="${user}?${user}:'Login'" id="title"><i class="fa fa-fw fa-user"></i></a>
+        <a th:href="@{#}">Sách mới</a>
+        <a th:href="@{'/home/catalog?query=100'}"><i class="fa fa-fw fa-search"></i>Danh mục</a>
+        <a th:href="@{#}">Sách bán chạy nhất</a>
+        <a onclick="openNav()" style="float: right"><i class="fa fa-fw fa-user"></i>Tài khoản</a>
     </div>
     <div id="mySidepanel" class="sidepanel">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="#" name="login">Đăng nhập</a>
-        <a href="#" style="display: none" name="userr">Thông tin</a>
-        <a href="#" style="display: none" name="userr">Đơn hàng</a>
-        <a href="#" style="display: none" name="userr">Lịch sử</a>
-        <a href="#" style="display: none" name="userr">Đăng xuất</a>
+        <a th:href="@{/customer/login}" id="000"><i class="icono-power"></i> Đăng nhập</a>
+        <a th:href="@{#}" style="display: none;text-align: center" id="005" th:text="${#session.getAttribute('user')}">customer</a>
+        <a th:href="@{/customer/information}" style="display: none" id="001"><i class="icono-user"></i> Thông tin</a>
+        <a th:href="@{/admin/ordermanager}" style="display: none" id="002"><i class="icono-document"></i> Đơn hàng</a>
+        <a th:href="@{/admin/customer-info}" style="display: none" id="006"><i class="icono-list"></i> Khách hàng</a>
+        <a th:href="@{/admin/productmanager}" style="display: none" id="008"><i class="icono-cart"></i> Sản phẩm</a>
+        <a th:href="@{/customer/history-transaction}" style="display: none" id="003"><i class="icono-barChart"></i> Lịch sử</a>
+        <a th:href="@{/customer/logout}" style="display: none" id="004"><i class="icono-cross"></i> Đăng xuất</a>
     </div>
     <script>
-        var title = document.getElementById("title").innerText;
-        if(title != 'Login'){
-            document.getElementsByName("userr").style.display = 'block';
-            document.getElementsByName("login").style.display = 'none';
+        var titlee = document.getElementById("005").innerText;
+        if(titlee!='customer'){
+            document.getElementById("000").style.display = 'none';
+            document.getElementById("001").style.display = 'block';
+            document.getElementById("003").style.display = 'block';
+            document.getElementById("004").style.display = 'block';
+            document.getElementById("005").style.display = 'block';
+        }
+        if(titlee == 'TienNguyen'){
+            document.getElementById("002").style.display = 'block';
+            document.getElementById("006").style.display = 'block';
+            document.getElementById("008").style.display = 'block';
         }
     </script>
     <script>
         function openNav() {
-            document.getElementById("mySidepanel").style.width = "200px";
+            document.getElementById("mySidepanel").style.width = "250px";
         }
 
         function closeNav() {
@@ -112,13 +87,11 @@
     </script>
     <div style="text-align: center;">
         <p>Chào mừng bạn tới NDT Book Store</p>
-        <h2>Sách là nguồn của cải quý báu của thế giới và là di sản xứng đáng của các thế hệ và các quốc gia. - Henry David Thoreau -</h2>
-        <h2>Đọc sách hay cũng giống như trò chuyện với các bộ óc tuyệt vời nhất của những thế kỷ đã trôi qua. - Rene Descartes -</h2>
-        <h2>Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn. - Barack Obama -</h2>
+        <h4>Việc đọc rất quan trọng. Nếu bạn biết cách đọc, cả thế giới sẽ mở ra cho bạn. - Barack Obama -</h4>
     </div>
 
     <div style="text-align: center;">
-        <button class="button" onclick="nextpage()"><span>Giỏ hàng</span></button>
+        <button class="button" onclick="nextpage()">Giỏ hàng</button>
     </div>
     <script type="text/javascript">
         function nextpage() {
@@ -126,105 +99,120 @@
         }
     </script>
 </div>
-<!--<div class="shelf">-->
-<!--    <h1>Sách mới</h1>-->
-<!--    <nav class="list">-->
-<!--        <ul>-->
-<!--            <li th:each="i:${productList}">-->
-<!--                <a th:href="@{'/home/product?ID=' + ${i.IDcode}}">-->
-<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
-<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
-<!--                    <h2 th:text="${i.price}+'đ'"></h2>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--</div>-->
-<!--<div class="shelf">-->
-<!--    <h1>Sách bán chạy nhất</h1>-->
-<!--    <nav class="list">-->
-<!--        <ul>-->
-<!--            <li th:each="i:${productList}">-->
-<!--                <a href="#">-->
-<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
-<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
-<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--</div>-->
 <div class="shelf">
     <h1>Văn học</h1>
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a href="#">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price} + 'đ'"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <div class="row">
+        <div class="cell" th:each="i:${productList1}">
+            <a th:href="@{'/home/product?ID=' + ${i.IDcode}+'&query='+${i.typee}}">
+                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
+                <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                <h2 th:text="${i.price} + 'đ'"></h2>
+            </a>
+        </div>
+    </div>
 </div>
 <div class="shelf">
     <h1>Thiếu nhi</h1>
-    <nav class="list">
-        <ul>
-            <li th:each="i:${productList}">
-                <a href="#">
-                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
-                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
-                    <h2 th:text="${i.price} + 'đ'"></h2>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <div class="row">
+        <div class="cell" th:each="i:${productList2}">
+            <a th:href="@{'/home/product?ID=' + ${i.IDcode}+'&query='+${i.typee}}">
+                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
+                <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                <h2 th:text="${i.price} + 'đ'"></h2>
+            </a>
+        </div>
+    </div>
 </div>
-<!--<div class="shelf">-->
-<!--    <h1>Kinh dị - Trinh thám</h1>-->
-<!--    <nav class="list">-->
-<!--        <ul>-->
-<!--            <li th:each="i:${productList}">-->
-<!--                <a href="#">-->
-<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
-<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
-<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
+<div class="shelf">
+    <h1>Khoa học</h1>
+    <div class="row">
+        <div class="cell" th:each="i:${productList3}">
+            <a th:href="@{'/home/product?ID=' + ${i.IDcode}+'&query='+${i.typee}}">
+                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
+                <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                <h2 th:text="${i.price} + 'đ'"></h2>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="shelf">
+    <h1>Kĩ năng</h1>
+    <div class="row">
+        <div class="cell" th:each="i:${productList4}">
+            <a th:href="@{'/home/product?ID=' + ${i.IDcode}+'&query='+${i.typee}}">
+                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
+                <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                <h2 th:text="${i.price} + 'đ'"></h2>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="shelf">
+    <h1>Ngoại ngữ</h1>
+    <div class="row">
+        <div class="cell" th:each="i:${productList5}">
+            <a th:href="@{'/home/product?ID=' + ${i.IDcode}+'&query='+${i.typee}}">
+                <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">
+                <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>
+                <h2 th:text="${i.price} + 'đ'"></h2>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row" style="background-color: orangered;color: white">
+    <div class="col-50 row">
+        <a th:href="@{#}" style="color: white;padding-left: 10px"></i>Chi nhánh</a>
+<!--        <div class="col-10">-->
+<!--            <label class="icono-home"></label>-->
+<!--        </div>-->
+<!--        <div class="col-70">-->
+<!--            <label th:text="${ad.address}"></label>-->
+<!--        </div>-->
+    </div>
+    <div class="col-50">
+        <a th:href="@{#}" style="color: white">Quy định đổi trả, bảo hành sản phẩm</a>
+    </div>
+</div>
+<!--<div class="row" style="background-color: orangered;color: white">-->
+<!--    <div class="col-50 row">-->
+<!--        <div class="col-10">-->
+<!--            <label class="icono-iphone"></label>-->
+<!--        </div>-->
+<!--        <div class="col-70">-->
+<!--            <label th:text="${ad.phone}"></label>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="col-50">-->
+<!--        <a th:href="@{#}" style="color: white"></i>Chi nhánh</a>-->
+<!--    </div>-->
 <!--</div>-->
-<!--<div class="shelf">-->
-<!--    <h1>Kĩ năng</h1>-->
-<!--    <nav class="list">-->
-<!--        <ul>-->
-<!--            <li th:each="i:${productList}">-->
-<!--                <a href="#">-->
-<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
-<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
-<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--</div>-->
-<!--<div class="shelf">-->
-<!--    <h1>Ngoại ngữ</h1>-->
-<!--    <nav class="list">-->
-<!--        <ul>-->
-<!--            <li th:each="i:${productList}">-->
-<!--                <a href="#">-->
-<!--                    <img th:src="@{'data:image/jpg;base64,'+ ${i.imagebase64}}">-->
-<!--                    <h3 th:text="${i.cost} + 'đ (-' + ${i.sale} + '%)'"></h3>-->
-<!--                    <h2 th:text="${i.price} + 'đ'"></h2>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--</div>-->
-<footer>
+<div class="row" style="background-color: orangered;color: white">
+    <div class="col-50 row">
+<!--        <div class="col-10">-->
+<!--            <label>Address</label>-->
+<!--        </div>-->
+<!--        <div class="col-70">-->
+<!--            <label th:text="${ad.address}"></label>-->
+<!--        </div>-->
+    </div>
+    <div class="col-50">
+        <a th:href="@{#}" style="color: white"></i>Chương trình đặc biệt</a>
+    </div>
+</div>
+<div class="row" style="background-color: orangered;color: white">
+    <div class="col-50 row">
+<!--        <div class="col-10">-->
+<!--            <label>Phone</label>-->
+<!--        </div>-->
+<!--        <div class="col-70">-->
+<!--            <label th:text="${ad.phone}"></label>-->
+<!--        </div>-->
+    </div>
+    <div class="col-50">
+        <a th:href="@{#}" style="color: white"><i class="icono-youtube"> </i>Hướng dẫn đặt hàng</a>
+    </div>
+</div>
+<footer style="margin-top: 30px">
     <h2>NDT Book Store</h2>
 </footer>
 </body>

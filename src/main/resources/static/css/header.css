@@ -1,0 +1,61 @@
+
+body {font-family: "Times New Roman", Helvetica, sans-serif;}
+.navbar {
+    text-align: right;
+    width: 100%;
+    background-color:#ffc46b;
+    overflow: auto;
+}
+.navbar a {
+    float: left;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover{
+    background-color: orangered;
+}
+
+.active {
+    background-color: orangered;
+}
+
+@media screen and (max-width: 690px) {
+    .navbar a{
+        float: none;
+        display: block;
+    }
+}
+.sidepanel  {
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    background-color:#ff9935;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    padding-bottom: 10px;
+    right: 8px;
+}
+
+.sidepanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidepanel a:hover {
+    color: white;
+}
+
+.sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+}
